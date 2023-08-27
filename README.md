@@ -1,27 +1,32 @@
-# React + TypeScript + Vite
+# Convas Rental Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Convas Rental](./public/covans.jpeg)
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Bienvenido a la página de aterrizaje de Convas Rental, donde puedes encontrar los mejores productos para tu próxima aventura al aire libre. Ya sea que necesites alquilar equipos para acampar, hacer senderismo o deportes de invierno, ¡estamos aquí para satisfacer tus necesidades!
 
-## Expanding the ESLint configuration
+## Características
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Explora nuestra amplia selección de equipos de alta calidad.
+- Reserva en línea y asegura tu equipo antes de tu aventura.
+- Información detallada sobre cada producto y sus especificaciones.
+- Equipo profesional y amigable listo para ayudarte con tus elecciones.
 
-- Configure the top-level `parserOptions` property like this:
+## Capturas de Pantalla
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Tecnologías Utilizadas
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- TypeScript
+- Vite
+
+## Instalación y Ejecución
+
+1. Instalacion de dependencias
+   ```bash
+    yarn install
+   ```
+2. Ejecutar el servidor de desarrollo
+3. ```bash
+   yarn dev
+   ```
