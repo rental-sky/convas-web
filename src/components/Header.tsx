@@ -1,37 +1,31 @@
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
-const Header = ({
-  setFilter,
-}: {
-  setFilter: React.Dispatch<
-    React.SetStateAction<'tables' | 'boots' | 'goggles' | 'helmets' | undefined>
-  >;
-}) => {
+const Header = () => {
   return (
     <header className="flex justify-between p-6 px-10">
-      <h1
-        className="text-2xl font-bold text-[#144b84] font-sans cursor-pointer"
-        onClick={() => {
-          setFilter(undefined);
-        }}
-      >
-        Covans
-      </h1>
+      <Link to="/" className="flex justify-center items-center gap-2 ">
+        <img
+          className="rounded-full "
+          style={{ width: '40px', height: '40px' }}
+          src={'/covans.jpg'}
+          alt={'logo'}
+        />
+        <h1 className="text-lg font-bold  font-sans cursor-pointer">Covans</h1>
+      </Link>
       <div className="flex gap-6">
-        <p
-          className="text-[#144b84] cursor-pointer "
-          onClick={() => {
-            setFilter(undefined);
-          }}
-        >
-          Catalogo
+        <p className="cursor-pointer text-lg">
+          <Link to="/">Catalogo</Link>
         </p>
-        <p className="text-[#144b84] cursor-pointer">Nosotros</p>
-        <p className="text-[#144b84] cursor-pointer">Contacto</p>
+        <p className="cursor-pointer text-lg">
+          <Link to="/about">Nosotros</Link>
+        </p>
       </div>
 
       <div className="cursor-pointer">
-        <AiOutlineShoppingCart className="text-[#144b84] text-3xl" />
+        <Link to="/cart">
+          <AiOutlineShoppingCart className=" text-3xl" />
+        </Link>
       </div>
     </header>
   );

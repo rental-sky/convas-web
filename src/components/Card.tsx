@@ -1,27 +1,18 @@
-type Product = 'tables' | 'boots' | 'goggles' | 'helmets';
+import { Link } from 'react-router-dom';
 
 const Card = ({
   product,
-  setFilter,
 }: {
-  product: { name: string; image: string };
-  setFilter: React.Dispatch<React.SetStateAction<Product | undefined>>;
+  product: { name: string; image: string; key: string };
 }) => {
   return (
-    <div
-      className="bg-white shadow-lg p-2 m-4 rounded-xl cursor-pointer"
-      onClick={() => {
-        setFilter(product.name as Product);
-      }}
-    >
-      <h2 className="text-xl font-semibold text-[#144b84] mb-2">
-        {product.name}
-      </h2>
-      {/* <p className="text-[#144b84] mb-2">${product.price} por dia</p> */}
-      <img className=" rounded-lg mb-4" src={product.image} alt={'table'} />
-      {/* <button className="m-8 bg-[#144b84] text-white px-4 py-2 rounded-lg w-8/12">
-        Ver mas
-      </button> */}
+    <div className="bg-white shadow-lg p-2 m-4 rounded-xl cursor-pointer">
+      <Link to={`/${product.key}`}>
+        <h2 className="text-xl font-sans text-[#8ab3cf] font-extrabold mb-2 tracking-wider ">
+          {product.name}
+        </h2>
+        <img className=" rounded-lg mb-4" src={product.image} alt={'table'} />
+      </Link>
     </div>
   );
 };

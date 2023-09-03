@@ -1,21 +1,17 @@
-const ProductCard = ({
-  product,
-}: {
-  product: {
-    name: string;
-    image: string;
-    price: number;
-    brand: string;
-    available: boolean;
+import useAppStore, { CartItem } from '../store/useAppStore';
+
+const ProductCard = ({ product }: { product: CartItem }) => {
+  const { addCartItem, cartItems, removeCartItem } = useAppStore();
+
+  const isInCart = cartItems.some((item) => item.name === product.name);
+
+  const handleClick = () => {
+    if (isInCart) removeCartItem(product);
+    else addCartItem(product);
   };
-}) => {
+
   return (
-    <div
-      className="bg-white shadow-lg p-2 m-4 rounded-xl cursor-pointer"
-      onClick={() => {
-        // TODO add to cart
-      }}
-    >
+    <div className="bg-white shadow-lg p-2 m-4 rounded-xl cursor-pointer">
       <h2 className="text-xl font-semibold text-[#144b84] mb-2">
         {product.name}
       </h2>
@@ -25,8 +21,13 @@ const ProductCard = ({
       <p className="text-[#144b84] mb-2">
         Disponible: {product.available ? 'Si' : 'No'}
       </p>
-      <button className="m-8 bg-[#144b84] text-white px-4 py-2 rounded-lg w-8/12">
-        Agregar
+      <button
+        className={`m-8  ${
+          isInCart ? 'bg-red-400' : 'bg-blue-400'
+        }  text-white px-4 py-2 rounded-lg w-8/12`}
+        onClick={handleClick}
+      >
+        {isInCart ? 'Quitar' : 'Agregar'}
       </button>
     </div>
   );

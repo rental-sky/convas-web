@@ -1,7 +1,13 @@
-import React from 'react'
+import { Layout } from '../layout/MainLayout';
 
-export default function Boots() {
+const Boots = () => {
   return (
-    <div>Boots</div>
-  )
-}
+    <Layout>
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-3xl font-bold">Boots</h1>
+      </div>
+    </Layout>
+  );
+};
+
+export default Boots;
