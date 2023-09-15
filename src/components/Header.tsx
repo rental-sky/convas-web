@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className="flex justify-between p-6 px-10">
+    <header className="flex justify-between p-6 px-10 bg-gradient-to-r from-sky-700 to-cyan-500">
       <Link to="/" className="flex justify-center items-center gap-2 ">
         <img
           className="rounded-full "

@@ -12,7 +12,7 @@ export default function Tables() {
 
   const fetchExcelTableData = async () => {
     const url =
-      'https://docs.google.com/spreadsheets/d/1Op_uGIemnQm8klGlqH0dyvqGqlkv5gQ6jtY7hDrWkrw/edit?usp=sharing';
+      'https://docs.google.com/spreadsheets/d/1YRE0gVZR1-1ouoi_ObPeyMi1rE7pHTndMKI2YiLj9cA/edit?usp=sharing';
 
     try {
       setloading(true);
@@ -26,13 +26,18 @@ export default function Tables() {
       }) as any[];
       const filteredData = parsedData.filter((row) => row?.length > 1);
 
-      const mappepdData = filteredData.slice(2).map((row) => {
+      const mappepdData = filteredData.slice(3).map((row) => {
         return {
           type: row[1],
           name: row[2],
           price: row[3],
           brand: row[4],
-          available: row[5] === 'si',
+          available: row[5] === 'SI',
+          size: row[6],
+          image: `tables/${row[2]
+            .replace(/\s/g, '_')
+            .replace('.', '')
+            .concat(`_${row[6]}.png`)}`,
         };
       });
       setloading(false);

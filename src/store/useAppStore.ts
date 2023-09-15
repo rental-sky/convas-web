@@ -7,6 +7,7 @@ export type CartItem = {
   brand: string;
   available: boolean;
   count?: number;
+  size?: string;
 };
 
 export type AppStore = {

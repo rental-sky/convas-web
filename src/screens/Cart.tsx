@@ -81,8 +81,8 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div className=" md:flex justify-center mt-10">
-        <div className="w-screen p-8  md:w-1/2 ">
+      <div className="md:flex justify-center mt-10">
+        <div className="w-screen h-full p-8  md:w-1/2 ">
           <h2 className="text-xl font-semibold mb-4">Lista de articulos</h2>
           <ul>
             {cartItems.map((product, index) => (

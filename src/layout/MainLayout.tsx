@@ -19,13 +19,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   console.log(location.pathname);
 
   return (
-    <div className=" bg-[#8ab3cf] w-screen h-full">
+    <div className="w-full h-screen">
       <Header />
 
-      {children}
+      <div className="bg-gradient-to-r from-sky-700 to-cyan-400">
+        {children}
+      </div>
 
       {location.pathname === '/cart' ? null : (
-        <footer className="bg-[#4180ab] p-2 text-white text-center sticky bottom-0 w-full rounded-t-3xl ">
+        <footer className="bg-gradient-to-r from-sky-700 to-cyan-500 p-2 text-white text-center sticky bottom-0 w-full rounded-t-3xl ">
           <div className="flex justify-between px-10 items-center py-2 ">
             <p className="font-medium text-xl ml-10">
               Total: {formatCurrency(total)}{' '}
