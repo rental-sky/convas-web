@@ -18,6 +18,8 @@ const generateWhatsAppMessage = (
     date: string;
     time: string;
     phone: string;
+    height?: string;
+    weight?: string;
   },
   total: number
 ) => {
@@ -61,6 +63,8 @@ const Cart = () => {
     date: '',
     time: '',
     phone: '',
+    height: '',
+    weight: '',
   });
 
   const { name, address, date, time, phone } = formData;
@@ -195,6 +199,34 @@ const Cart = () => {
                 id="phone"
                 name="phone"
                 value={phone}
+                onChange={handleInputChange}
+                className="w-full p-2 border-2 rounded bg-[#8ab3cf] text-white"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="height" className="mb-2">
+                Altura
+              </label>
+              <input
+                type="number"
+                id="height"
+                name="height"
+                value={formData.height}
+                onChange={handleInputChange}
+                className="w-full p-2 border-2 rounded bg-[#8ab3cf] text-white"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="weight" className="mb-2">
+                Peso
+              </label>
+              <input
+                type="number"
+                id="weight"
+                name="weight"
+                value={formData.weight}
                 onChange={handleInputChange}
                 className="w-full p-2 border-2 rounded bg-[#8ab3cf] text-white"
               />

@@ -17,10 +17,13 @@ export type AppStore = {
   removeCartItem: (item: CartItem) => void;
   addCount: (item: CartItem) => void;
   removeCount: (item: CartItem) => void;
+  showMenu: boolean;
+  setShowMenu: (show: boolean) => void;
 };
 
 const useAppStore = create<AppStore>((set) => ({
   cartItems: [],
+  showMenu: false,
   addCartItem: (item: CartItem) =>
     set((state) => ({
       cartItems: [...state.cartItems, item],
@@ -46,6 +49,7 @@ const useAppStore = create<AppStore>((set) => ({
       total: state.total - item.price,
     })),
   total: 0,
+  setShowMenu: (show: boolean) => set(() => ({ showMenu: show })),
 }));
 
 export default useAppStore;
