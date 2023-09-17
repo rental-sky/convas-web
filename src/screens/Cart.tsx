@@ -8,7 +8,7 @@ import {
 } from 'react-icons/ai';
 import { BsPlus } from 'react-icons/bs';
 
-const PHONE = '5491137629311';
+const PHONE = '5492901403225';
 
 const generateWhatsAppMessage = (
   cartItems: CartItem[],
@@ -40,7 +40,10 @@ Nombre: ${contactInfo.name}
 Dirección: ${contactInfo.address}
 Fecha: ${contactInfo.date}
 Hora: ${contactInfo.time}
-Teléfono: ${contactInfo.phone}`;
+Teléfono: ${contactInfo.phone}
+Altura: ${contactInfo.height}
+Peso: ${contactInfo.weight}\n\n
+`;
 
   message += `\n\nTotal: ${formatCurrency(total)}\n\n`;
 
