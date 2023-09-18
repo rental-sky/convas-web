@@ -6,7 +6,7 @@ const Card = ({
   product: { name: string; image: string; key: string };
 }) => {
   return (
-    <div className="bg-white shadow-lg p-2 m-4 rounded-xl cursor-pointer">
+    <div className="bg-white shadow-lg p-4 m-4 rounded-xl cursor-pointer">
       <Link to={`/${product.key}`}>
         <h2 className="text-xl font-sans text-[#8ab3cf] font-extrabold mb-2 tracking-wider ">
           {product.name}
