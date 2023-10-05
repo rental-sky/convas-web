@@ -55,7 +55,7 @@ const Boots = () => {
 
   return (
     <Layout>
-      <h2 className="text-3xl  font-bold mb-4">Botas</h2>
+      <h2 className="text-3xl  font-bold mb-4 mt-8">Botas</h2>
 
       {loading ? (
         <Spinner />

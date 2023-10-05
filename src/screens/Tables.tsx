@@ -53,7 +53,7 @@ export default function Tables() {
 
   return (
     <Layout>
-      <h2 className="text-3xl  font-bold mb-4">Tablas</h2>
+      <h2 className="text-3xl  font-bold mb-4 mt-8">Tablas</h2>
 
       {loading ? (
         <Spinner />
