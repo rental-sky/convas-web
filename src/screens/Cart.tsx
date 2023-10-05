@@ -28,6 +28,7 @@ const generateWhatsAppMessage = (
 
   cartItems.forEach((item, index) => {
     message += `Articulo ${index + 1}:
+Tipo: ${item.type}
 Nombre: ${item.name}
 Marca: ${item.brand}
 Precio: ${item.price.toFixed(2)} ARS
