@@ -34,10 +34,7 @@ export default function Tables() {
           brand: row[4],
           available: row[5] === 'SI',
           size: row[6],
-          image: `tables/${row[2]
-            .replace(/\s/g, '_')
-            .replace('.', '')
-            .concat(`_${row[6]}.png`)}`,
+          image: `${row[8]}`,
         };
       });
       setloading(false);

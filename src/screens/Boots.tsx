@@ -34,12 +34,7 @@ const Boots = () => {
           brand: row[4],
           available: row[5] === 'SI',
           size: row[6],
-          image: `boots/${row[4]
-            .trim()
-            .toLowerCase()
-            .concat(
-              `_${row[2]?.toLowerCase()?.replace(/\s/g, '_')}_${row[6]}.png`
-            )}`.replace('_undefined', ''),
+          image: `${row[8]}`,
         };
       });
       setloading(false);
