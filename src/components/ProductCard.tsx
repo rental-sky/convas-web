@@ -44,6 +44,8 @@ const ProductCard = ({ product }: { product: CartItem }) => {
     ? cartItems.find((item) => item.name === product.name)
     : product;
 
+  console.log(product.size, 'HEY');
+
   return (
     <>
       <div className="bg-slate-50 shadow-xl p-4 m-4 rounded-xl cursor-pointer ">
@@ -58,11 +60,18 @@ const ProductCard = ({ product }: { product: CartItem }) => {
           {product.name}
         </h2>
         <div className="w-full h-1 border-2 border-cyan-950 my-4" />
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <p className="text-[#144b84] mb-2 text-base font-bold">Talla</p>
-          <div className="py-4 px-4 shadow-xl  border-2 w-min mb-2 rounded-lg ">
-            <span className="text-[#144b84] font-bold ">{product.size}</span>
-          </div>
+          {product.size
+            ? product.size.map((size, index) => (
+                <div
+                  className="py-4 px-4 shadow-xl  border-2 w-min mb-2 rounded-lg "
+                  key={index}
+                >
+                  <span className="text-[#144b84] font-bold ">{size}</span>
+                </div>
+              ))
+            : null}
         </div>
 
         <p className="text-black mb-2 text-xl font-extrabold text-left">
@@ -114,9 +123,11 @@ const ProductCard = ({ product }: { product: CartItem }) => {
             <button
               className="bg-[#4180ab] text-red rounded-full p-4"
               onClick={() => {
-                if (!modalProduct?.count || modalProduct?.count === 1)
-                  removeCartItem(product);
-                else removeCount(product);
+                if (isInCart) {
+                  if (!modalProduct?.count || modalProduct?.count === 1)
+                    removeCartItem(product);
+                  else removeCount(product);
+                }
               }}
             >
               <AiOutlineMinus />

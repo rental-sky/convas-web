@@ -8,7 +8,7 @@ export type CartItem = {
   type: string;
   available: boolean;
   count?: number;
-  size?: string;
+  size?: string[];
 };
 
 export type AppStore = {
@@ -27,7 +27,7 @@ const useAppStore = create<AppStore>((set) => ({
   showMenu: false,
   addCartItem: (item: CartItem) =>
     set((state) => ({
-      cartItems: [...state.cartItems, item],
+      cartItems: [...state.cartItems, { ...item, count: 1 }],
       total: state.total + item.price,
     })),
   removeCartItem: (item: CartItem) =>

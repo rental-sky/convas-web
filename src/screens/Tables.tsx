@@ -33,11 +33,18 @@ export default function Tables() {
           price: row[3],
           brand: row[4],
           available: row[5] === 'SI',
-          size: row[6],
+          size: row[6].toString().trim()?.includes('"')
+            ? row[6].toString().trim().split('"')
+            : [row[6]],
+
           image: `${row[8]}`,
         };
       });
+
+      console.log(mappepdData);
+
       setloading(false);
+
       setData(mappepdData);
     } catch (error) {
       console.error('Error fetching or parsing Excel data:', error);
