@@ -63,7 +63,7 @@ const ProductCard = ({ product }: { product: CartItem }) => {
         <div className="flex flex-wrap items-center gap-4">
           <p className="text-[#144b84] mb-2 text-base font-bold">Talla</p>
           {product.size
-            ? product.size.map((size, index) => (
+            ? product?.size?.map((size, index) => (
                 <div
                   className="py-4 px-4 shadow-xl  border-2 w-min mb-2 rounded-lg "
                   key={index}

@@ -33,12 +33,15 @@ const Boots = () => {
           price: row[3],
           brand: row[4],
           available: row[5] === 'SI',
-          size: row[6],
+          size: row[6].toString().trim()?.includes('"')
+            ? row[6].toString().trim().split('"')
+            : [row[6]],
           image: `${row[8]}`,
         };
       });
       setloading(false);
       setData(mappepdData);
+      console.log(mappepdData);
     } catch (error) {
       console.error('Error fetching or parsing Excel data:', error);
     }

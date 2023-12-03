@@ -35,7 +35,9 @@ export default function Helmets() {
           price: row[3],
           brand: row[4],
           available: row[5] === 'SI',
-          size: row[6],
+          size: row[6].toString().trim()?.includes('"')
+            ? row[6].toString().trim().split('"')
+            : [row[6]],
           image: `helmets/${row[8].concat(`.jpg`)}`,
         };
       });
