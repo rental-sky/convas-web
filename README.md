@@ -1,32 +1,24 @@
-# Convas Rental Landing Page
+:sparkles::sparkles::sparkles: **I am currently updating this project to use WP GraphQL & NextJS's SSG (Static Site Generation)!** :tada::tada:
 
-![Convas Rental](./public/covans.jpeg)
+## :moneybag: React eCommerce Application
 
-## Descripción
+<p align="center">
+  <img src="./doc/recording.gif">
+</p>
 
-Bienvenido a la página de aterrizaje de Convas Rental, donde puedes encontrar los mejores productos para tu próxima aventura al aire libre. Ya sea que necesites alquilar equipos para acampar, hacer senderismo o deportes de invierno, ¡estamos aquí para satisfacer tus necesidades!
+## Basic Overview
 
-## Características
+This simple eCommerce application shows how to integrate WooCommerce REST API into a NextJS framework. It is also using Typescript, Redux & React hooks making this application fun to use. Also with Ant Design as the design system, this project can be a very good starting point for your next shopping cart website.
 
-- Explora nuestra amplia selección de equipos de alta calidad.
-- Reserva en línea y asegura tu equipo antes de tu aventura.
-- Información detallada sobre cada producto y sus especificaciones.
-- Equipo profesional y amigable listo para ayudarte con tus elecciones.
+## Setup
 
-## Capturas de Pantalla
+```bash
+yarn install
+yarn dev
+```
 
-## Tecnologías Utilizadas
+Then open http://localhost:3000/
 
-- TypeScript
-- Vite
+## Copyright and license
 
-## Instalación y Ejecución
-
-1. Instalacion de dependencias
-   ```bash
-    yarn install
-   ```
-2. Ejecutar el servidor de desarrollo
-3. ```bash
-   yarn dev
-   ```
+MIT
