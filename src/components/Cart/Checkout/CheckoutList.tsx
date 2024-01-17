@@ -1,8 +1,9 @@
 import React from 'react';
 import CheckoutItem from './CheckoutItem';
-import { Product } from '../../../actions';
+
 import { CartContext } from '../../../contexts';
 import './CheckoutList.less';
+import { Product } from '../../../store/productStore';
 
 interface CheckoutListProps {
   products: Product[];

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Product } from '../../../actions';
-
 import { getCartItemCount } from '../../../helpers';
 import ProductInfo from '../ProductInfo';
 import useCartStore from '../../../store/cartStore';
+import { Product } from '../../../store/productStore';
 
 interface CheckoutItemProps {
   product: Product;

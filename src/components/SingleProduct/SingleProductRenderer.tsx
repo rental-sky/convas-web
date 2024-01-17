@@ -1,8 +1,9 @@
 import React from 'react';
-import { Product } from '../../actions';
+
 import SingleProduct from './SingleProduct';
 import SingleProductSkeleton from './SingleProductSkeleton/SingleProductSkeleton';
 import { SingleProductContext, Breakpoints } from '../../contexts';
+import { Product } from '../../store/productStore';
 
 interface SingleProductRendererProps {
   product?: Product;
@@ -13,7 +14,7 @@ interface SingleProductRendererProps {
 const SingleProductRenderer: React.FC<SingleProductRendererProps> = ({
   product,
   loading,
-  breakpoints
+  breakpoints,
 }) => {
   return (
     <SingleProductContext.Provider value={breakpoints}>

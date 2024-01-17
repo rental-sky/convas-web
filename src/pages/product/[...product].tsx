@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import MainLayout from '../../components/MainLayout/MainLayout';
 import SingleProductRenderer from '../../components/SingleProduct/SingleProductRenderer';
 
-import useProductStore from '../../store/productStore';
+import useProductStore, { ProducStore } from '../../store/productStore';
 
 const Product = () => {
   const [isLoading, setLoading] = useState(false);
@@ -13,7 +13,9 @@ const Product = () => {
   const { product: productParam } = router.query;
   const productId = productParam ? productParam[0] : null;
 
-  const { currentProduct, fetchProductById } = useProductStore();
+  const [currentProduct, fetchProductById] = useProductStore(
+    (s: ProducStore) => [s.currentProduct, s.fetchProductById]
+  );
   const currentProductId = `${currentProduct?.id ?? ''}`;
   const currentProductName = currentProduct?.name ?? '...';
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Typography, Button } from 'antd';
-import { Product } from '../../actions';
+
 import { CartContext } from '../../contexts';
 import CheckoutModal from './Checkout/CheckoutModal';
+import { Product } from '../../store/productStore';
 
 const { Title, Text } = Typography;
 
