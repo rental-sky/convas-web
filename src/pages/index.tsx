@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import MainLayout from '../components/MainLayout/MainLayout';
 import MainCarousel from '../components/MainCarousel/MainCarousel';
@@ -69,7 +69,9 @@ const Home = () => {
     },
   ];
 
-  init();
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <MainLayout title="Convans Store">
