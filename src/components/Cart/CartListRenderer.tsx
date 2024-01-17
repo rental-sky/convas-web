@@ -12,11 +12,6 @@ const CartListRenderer: React.FC<CartListRendererProps> = ({
   cartProducts,
   totalItems,
 }) => {
-  console.log({
-    cartProducts,
-    totalItems,
-  });
-
   return (
     <>
       {cartProducts.length > 0 && totalItems > 0 ? (

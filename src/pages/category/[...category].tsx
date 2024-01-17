@@ -1,22 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+
 import MainLayout from '../../components/MainLayout/MainLayout';
-import { fetchCategoryProducts, fetchCategory } from '../../actions';
 
 import ProductListRenderer from '../../components/ProductList/ProductListRenderer';
 import MainPageHeader from '../../components/MainPageHeader/MainPageHeader';
-import useProductStore from '../../store/productStore';
+import useProductStore, { ProducStore } from '../../store/productStore';
 
 const Category = () => {
   const [isLoading, setLoading] = useState(false);
 
   const router = useRouter();
   const { category: categoryParam } = router.query;
-  const category_id = categoryParam ? categoryParam[0] : null;
   const currentCategoryName = categoryParam ? categoryParam[1] : '...';
 
-  const { categoryProducts } = useProductStore();
+  const [categoryProducts] = useProductStore((s: ProducStore) => [
+    s.categoryProducts,
+  ]);
 
   const categoriesProducts = useMemo(() => {
     if (!categoryProducts) return [];
@@ -28,8 +28,6 @@ const Category = () => {
     if (!categoriesProducts) setLoading(true);
     else setLoading(false);
   }, [categoriesProducts]);
-
-  console.log(categoriesProducts, 'HEY');
 
   return (
     <MainLayout title={`Covans - ${currentCategoryName} category`}>

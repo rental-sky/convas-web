@@ -14,11 +14,11 @@ interface ProductListRendererProps {
 }
 
 const ProductListRenderer: React.FC<ProductListRendererProps> = ({
-  products,
+  products = [],
   skeleton,
   skeletonCount = 0,
   spin,
-  breakpoints
+  breakpoints,
 }) => {
   return (
     <SkeletonListContext.Provider value={breakpoints}>
