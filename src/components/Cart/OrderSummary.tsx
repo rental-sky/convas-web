@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Button } from 'antd';
 
-import { CartContext } from '../../contexts';
 import CheckoutModal from './Checkout/CheckoutModal';
 import { Product } from '../../store/productStore';
 
@@ -10,14 +9,17 @@ const { Title, Text } = Typography;
 interface OrderSummaryProps {
   cartProducts: Product[];
   totalItems: number;
+  totalPrice: number;
 }
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
   cartProducts,
   totalItems,
+  totalPrice,
 }) => {
-  const { totalPrice } = React.useContext(CartContext);
   const [modalVisibility, setModalVisibility] = useState(false);
+
+  console.log('cartProducts', totalPrice);
 
   return (
     <div className="order-summary">

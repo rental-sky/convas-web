@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import api from '../api';
 
 export interface ProductImage {
@@ -52,12 +52,12 @@ const useProductStore = create<ProducStore>((set, get) => ({
       get().categoryProducts.googles
     );
 
-    console.log(allProducts);
+    if (allProducts.length === 0) return;
 
-    const product = allProducts.find((product: Product) => product.id === id);
+    const product = allProducts.find((product: Product) => product?.id === id);
 
     if (!product) {
-      throw new Error(`Product with id ${id} not found`);
+      return;
     }
     get().setCurrentProduct(product);
   },

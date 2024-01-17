@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Row, Col, Typography, Descriptions, Button } from 'antd';
+import { Row, Col, Typography, Descriptions, Button, Tag } from 'antd';
 import cartNotification from './CartNotification';
 
 import { SingleProductContext } from '../../contexts';
@@ -26,6 +26,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
     regular_price,
     sale_price,
     on_sale,
+    sizes,
     price,
   } = product;
   const productId = `${id}`;
@@ -56,7 +57,16 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           sm={breakpoints[0].sm}
           className="product-image"
         >
-          {featured_image && <img src={featured_image} />}
+          {featured_image && (
+            <img
+              src={featured_image}
+              style={{
+                height: '500px',
+                width: '100%',
+                objectFit: 'contain',
+              }}
+            />
+          )}
         </Col>
         <Col
           xl={breakpoints[1].xl}
@@ -66,7 +76,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           className="product-description"
         >
           <Descriptions title={name} column={1}>
-            <Item key="price" label="Price" className="price-description">
+            <Item key="price" label="Precio" className="price-description">
               <Text
                 type="secondary"
                 delete={on_sale}
@@ -76,9 +86,21 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
               </Text>
               {on_sale && <Text style={{ marginLeft: 15 }}>${sale_price}</Text>}
             </Item>
-            <Item key="desc" label="Description">
+            <Item key="desc" label="Descripcion">
               <p dangerouslySetInnerHTML={{ __html: description }} />
             </Item>
+            <Text type="secondary">Tallas:</Text>
+            <Row>
+              {Array.isArray(sizes) ? (
+                sizes.map((size, key) => (
+                  <Tag key={key + size} color="success">
+                    {size}
+                  </Tag>
+                ))
+              ) : (
+                <Tag color="success">{sizes}</Tag>
+              )}
+            </Row>
             <Item key="button" label="">
               <Button
                 type="primary"

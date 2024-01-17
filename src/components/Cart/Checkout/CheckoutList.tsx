@@ -15,9 +15,9 @@ const CheckoutList: React.FC<CheckoutListProps> = ({ products }) => {
   return (
     <div className="checkout-list">
       <div className="table-heading">
-        <div>Products Ordered</div>
-        <div>Amount</div>
-        <div>Item Subtotal</div>
+        <div>Productos</div>
+        <div>Monto</div>
+        <div>Subtotal</div>
       </div>
       {products.map((product) => {
         return <CheckoutItem product={product} key={product.id} />;
