@@ -1,9 +1,10 @@
 import React from 'react';
 import ProductList from './ProductList';
 import Spinner from '../Spinner/Spinner';
-import { Product } from '../../actions';
+
 import SkeletonList from '../SkeletonList/SkeletonList';
 import { SkeletonListContext, Breakpoints } from '../../contexts';
+import { Product } from '../../store/productStore';
 
 interface ProductListRendererProps {
   products: Product[];

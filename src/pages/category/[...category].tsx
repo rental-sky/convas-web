@@ -8,7 +8,7 @@ import MainPageHeader from '../../components/MainPageHeader/MainPageHeader';
 import useProductStore, { ProducStore } from '../../store/productStore';
 
 const Category = () => {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const router = useRouter();
   const { category: categoryParam } = router.query;
@@ -25,8 +25,7 @@ const Category = () => {
   }, [categoryProducts, categoryProducts]);
 
   useEffect(() => {
-    if (!categoriesProducts) setLoading(true);
-    else setLoading(false);
+    if (categoriesProducts && categoriesProducts.length > 0) setLoading(false);
   }, [categoriesProducts]);
 
   return (

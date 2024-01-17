@@ -24,11 +24,8 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-    console.log({ itemsLength }, 'HHH');
-
     if (itemsLength > 0) {
       const cartItemIds = getCartIds(items);
-      console.log({ cartItemIds }, 'JDJDJD');
 
       fetchProductsByIds(cartItemIds);
     }

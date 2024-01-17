@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+
 import MainLayout from '../components/MainLayout/MainLayout';
 import MainCarousel from '../components/MainCarousel/MainCarousel';
 import CategoryListRenderer from '../components/CategoryList/CategoryListRenderer';
 import ProductListRenderer from '../components/ProductList/ProductListRenderer';
 import SimpleHeading from '../components/SimpleHeading';
-import useProductStore from '../store/productStore';
+import useProductStore, { ProducStore } from '../store/productStore';
 
 const Home = () => {
-  // const dispatch = useDispatch();
-  const { saleProducts } = useProductStore();
-
-  // use zustand here chris
-  // const { mainCategories } = useCategorySelector();
+  const [saleProducts, init] = useProductStore((s: ProducStore) => [
+    s.saleProducts,
+    s.init,
+  ]);
 
   // mock
   const mainCategories = [
@@ -69,6 +68,8 @@ const Home = () => {
       },
     },
   ];
+
+  init();
 
   return (
     <MainLayout title="Convans Store">

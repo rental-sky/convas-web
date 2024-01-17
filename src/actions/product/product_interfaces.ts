@@ -10,7 +10,6 @@ export interface Product {
   id: number;
   name: string;
   slug: string;
-  date_created: string;
   description: string;
   price: string;
   regular_price: string;

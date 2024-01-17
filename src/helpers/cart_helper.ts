@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { Product, Cart } from '../actions';
+import { Cart } from '../actions';
 
 //Cookies.remove(CART_ITEMS);
 
@@ -8,14 +8,14 @@ export const CART_ITEMS_DELIMETER = ',';
 
 export const calculateTotalPrice = (cartItems: Cart[]): number => {
   let totalPrice = 0;
-  cartItems.map(item => {
+  cartItems.map((item) => {
     totalPrice += Number(item.price) * item.count;
   });
   return totalPrice;
 };
 
 export const getCartIds = (cartItems: Cart[]): string => {
-  let cartItemIds = cartItems.map(item => item.id);
+  let cartItemIds = cartItems.map((item) => item.id);
   return cartItemIds.join(CART_ITEMS_DELIMETER);
 };
 
@@ -23,7 +23,7 @@ export const getCartItemCount = (
   cartItems: Cart[],
   currentProductId: string
 ): number => {
-  return cartItems.find(item => item.id === currentProductId)?.count || 0;
+  return cartItems.find((item) => item.id === currentProductId)?.count || 0;
 };
 
 export const stringifyArr = (cartItems: Cart[]): string => {
@@ -56,8 +56,8 @@ export const getCartCookieArr = (): Cart[] => {
         {
           id: cartItemPieces[0],
           price: cartItemPieces[1],
-          count: Number(cartItemPieces[2])
-        }
+          count: Number(cartItemPieces[2]),
+        },
       ];
     });
   }
@@ -71,7 +71,7 @@ export const getTotalItemsCookie = (): number => {
 };
 
 export const getItemIndex = (cartItems: Cart[], id: string) => {
-  return cartItems.map(item => item.id).indexOf(id);
+  return cartItems.map((item) => item.id).indexOf(id);
 };
 
 export const removeItem = (cartItems: Cart[], id: string) => {

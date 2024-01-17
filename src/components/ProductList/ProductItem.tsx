@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { Product } from '../../actions';
+
 import { Row, Col, Card, Typography, Button } from 'antd';
 import { SkeletonListContext } from '../../contexts';
+import { Product } from '../../store/productStore';
 const { Text } = Typography;
 
 interface SaleProductItemProps {
@@ -14,14 +15,24 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
   const { id, slug, name, regular_price, sale_price, on_sale, images } =
     product;
 
-  const featured_image = images.length > 0 ? images[0].src : '';
+  const featured_image = images.length > 0 ? images[0] : '';
   return (
     <Link href="/product/[...product]" as={`/product/${id}/${slug}`}>
       <Col xl={xl} lg={lg} md={md} sm={sm} xs={xs} className="centered-col">
         <Card
           hoverable
           cover={
-            featured_image ? <img alt="example" src={featured_image} /> : null
+            featured_image ? (
+              <img
+                alt={featured_image.alt}
+                src={featured_image.src}
+                style={{
+                  height: '300px',
+                  width: '100%',
+                  objectFit: 'contain',
+                }}
+              />
+            ) : null
           }
         >
           <Row>

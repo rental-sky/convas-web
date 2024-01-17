@@ -1,7 +1,8 @@
 import React from 'react';
-import { Product } from '../../actions';
+
 import CartList from './CartList';
 import SkeletonList from '../SkeletonList/SkeletonList';
+import { Product } from '../../store/productStore';
 
 interface CartListRendererProps {
   cartProducts: Product[];
