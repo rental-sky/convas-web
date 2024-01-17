@@ -8,10 +8,7 @@ import SimpleHeading from '../components/SimpleHeading';
 import useProductStore, { ProducStore } from '../store/productStore';
 
 const Home = () => {
-  const [saleProducts, init] = useProductStore((s: ProducStore) => [
-    s.saleProducts,
-    s.init,
-  ]);
+  const [saleProducts] = useProductStore((s: ProducStore) => [s.saleProducts]);
 
   // mock
   const mainCategories = [
@@ -68,10 +65,6 @@ const Home = () => {
       },
     },
   ];
-
-  useEffect(() => {
-    init();
-  }, []);
 
   return (
     <MainLayout title="Convans Store">

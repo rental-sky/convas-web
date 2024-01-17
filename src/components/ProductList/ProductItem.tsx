@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Row, Col, Card, Typography, Button } from 'antd';
+import { Row, Col, Card, Typography, Button, Tag } from 'antd';
 import { SkeletonListContext } from '../../contexts';
 import { Product } from '../../store/productStore';
+import { isArray } from 'util';
 const { Text } = Typography;
 
 interface SaleProductItemProps {
@@ -12,7 +13,7 @@ interface SaleProductItemProps {
 
 const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
   const { xl, md, sm, lg, xs } = React.useContext(SkeletonListContext);
-  const { id, slug, name, regular_price, sale_price, on_sale, images } =
+  const { id, slug, name, regular_price, sale_price, on_sale, images, sizes } =
     product;
 
   const featured_image = images.length > 0 ? images[0] : '';
@@ -40,6 +41,17 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
               {name}
             </Text>
             {on_sale && <Button style={{ marginLeft: 10 }}>Sale!</Button>}
+          </Row>
+          <Row>
+            {Array.isArray(sizes) ? (
+              sizes.map((size, key) => (
+                <Tag key={key + size} color="success">
+                  {size}
+                </Tag>
+              ))
+            ) : (
+              <Tag color="success">{sizes}</Tag>
+            )}
           </Row>
           <Row>
             <Text type="secondary" delete={on_sale}>

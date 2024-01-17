@@ -7,12 +7,33 @@ import ProductListRenderer from '../../components/ProductList/ProductListRendere
 import MainPageHeader from '../../components/MainPageHeader/MainPageHeader';
 import useProductStore, { ProducStore } from '../../store/productStore';
 
+const MAP_CATEGORY_TITLE = {
+  helmets: {
+    title: 'Cascos',
+    subtitle: 'Cascos para snowboard de alto rendimiento.',
+  },
+  tables: {
+    title: 'Tablas',
+    subtitle: 'Tablas para snowboard de alto rendimiento.',
+  },
+  boots: {
+    title: 'Botas',
+    subtitle: 'Botas para snowboard de alto rendimiento.',
+  },
+  googles: {
+    title: 'Antiparras',
+    subtitle: 'Antiparras para snowboard de alto rendimiento.',
+  },
+};
+
 const Category = () => {
   const [isLoading, setLoading] = useState(true);
 
   const router = useRouter();
   const { category: categoryParam } = router.query;
-  const currentCategoryName = categoryParam ? categoryParam[1] : '...';
+  const currentCategoryName = (
+    categoryParam ? categoryParam[1] : '...'
+  ) as keyof typeof MAP_CATEGORY_TITLE;
 
   const [categoryProducts] = useProductStore((s: ProducStore) => [
     s.categoryProducts,
@@ -31,8 +52,8 @@ const Category = () => {
   return (
     <MainLayout title={`Covans - ${currentCategoryName} category`}>
       <MainPageHeader
-        title={`Category: ${currentCategoryName}`}
-        subTitle={currentCategoryName}
+        title={`${MAP_CATEGORY_TITLE[currentCategoryName]?.title}`}
+        subTitle={MAP_CATEGORY_TITLE[currentCategoryName]?.subtitle}
       />
       <ProductListRenderer
         spin={isLoading}

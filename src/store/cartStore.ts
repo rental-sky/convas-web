@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 // import Cookies from 'js-cookie';
 
 export const CART_ITEMS = 'CART_ITEMS';
@@ -82,8 +82,10 @@ const useCartStore = create<CartStore>((set, get) => ({
     return [];
   },
   calculateTotalPrice: (cartItems: Cart[]) => {
+    console.log(cartItems, 'cartItems');
+
     return cartItems.reduce((acc, item) => {
-      return acc + Number(item.price) * item.count;
+      return acc + parseFloat(item.price.replace(/,/g, '')) * item.count;
     }, 0);
   },
   getCartIds: (cartItems: Cart[]) => {

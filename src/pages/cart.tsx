@@ -16,7 +16,6 @@ const Cart = () => {
     useCartStore();
   const { cartProducts, fetchProductsByIds } = useProductStore();
   const itemsLength = items.length;
-
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Cart = () => {
 
   useEffect(() => {
     setTotalPrice(calculateTotalPrice(items));
-  });
+  }, [items]);
 
   return (
     <CartContext.Provider
@@ -56,6 +55,7 @@ const Cart = () => {
               <OrderSummary
                 cartProducts={cartProducts}
                 totalItems={totalItems}
+                totalPrice={totalPrice}
               />
             </Col>
           </Row>
