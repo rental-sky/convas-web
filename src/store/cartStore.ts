@@ -46,12 +46,20 @@ const useCartStore = create<CartStore>((set, get) => ({
   },
   updateCartItemCount: (id: string, add: boolean) => {
     set((state: CartStore) => {
+      console.log(add, 'QUE');
+
       const index = state.items.map((item) => item.id).indexOf(id);
+
+      console.log(state.items[index], 'HOLA');
+
       if (index > -1) {
         state.items[index].count += add ? 1 : -1;
       }
+
+      const totalItems = state.totalItems + (add ? 1 : -1);
+
       return {
-        totalItems: state.totalItems + 1,
+        totalItems: totalItems,
         items: [...state.items],
       };
     }),

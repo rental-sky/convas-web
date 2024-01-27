@@ -6,6 +6,17 @@ const MainCarousel = () => {
     <Carousel autoplay>
       <div>
         <img
+          src="/images/carousel-demo-images/5.jpeg"
+          style={{
+            height: '500px',
+            width: '100%',
+            backgroundImage: 'url(/images/carousel-demo-images/bg-1.jpg)',
+            objectFit: 'contain',
+          }}
+        />
+      </div>
+      <div>
+        <img
           src="/images/carousel-demo-images/1.jpg"
           style={{
             height: '500px',
@@ -16,11 +27,12 @@ const MainCarousel = () => {
       </div>
       <div>
         <img
-          src="/images/carousel-demo-images/2.jpg"
+          src="/images/carousel-demo-images/taller-1.jpg"
           style={{
             height: '500px',
             width: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
+            backgroundColor: '#ccc',
           }}
         />
       </div>

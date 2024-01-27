@@ -1,13 +1,23 @@
-import React, { useMemo } from 'react';
-import { Row, Col, Typography, Descriptions, Button, Tag } from 'antd';
+import React, { useMemo, useState } from 'react';
+import {
+  Row,
+  Col,
+  Typography,
+  Descriptions,
+  Button,
+  Tag,
+  List,
+  Card,
+} from 'antd';
 import cartNotification from './CartNotification';
 
 import { SingleProductContext } from '../../contexts';
 import './SingleProduct.less';
 import useCartStore, { Cart } from '../../store/cartStore';
 import { Product } from '../../store/productStore';
+import { CarOutlined } from '@ant-design/icons';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { Item } = Descriptions;
 
 interface SingleProductProps {
@@ -28,11 +38,18 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
     on_sale,
     sizes,
     price,
+    prices,
   } = product;
   const productId = `${id}`;
   const featured_image = images.length > 0 ? images[0].src : '';
 
+  const [seletecDays, setSelectedDays] = useState(1);
+
+  const isTarif = !!prices;
+
   const addItemToCart = () => {
+    const price = isTarif ? prices[seletecDays - 1] : product.price;
+
     const item: Cart = {
       id: productId,
       price,
@@ -61,8 +78,9 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
             <img
               src={featured_image}
               style={{
-                height: '500px',
+                height: '100%',
                 width: '100%',
+                backgroundColor: '#fafafa',
                 objectFit: 'contain',
               }}
             />
@@ -76,19 +94,45 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
           className="product-description"
         >
           <Descriptions title={name} column={1}>
-            <Item key="price" label="Precio" className="price-description">
-              <Text
-                type="secondary"
-                delete={on_sale}
-                className={`${on_sale ? 'on_sale' : 'regular'}`}
-              >
-                ${regular_price}
-              </Text>
-              {on_sale && <Text style={{ marginLeft: 15 }}>${sale_price}</Text>}
-            </Item>
+            {isTarif ? (
+              <Card title="Precios">
+                <Title level={4}>Precios</Title>
+                {/* <Row gutter={16}> */}
+                {prices.map((price, key) => (
+                  <Card.Grid
+                    style={{
+                      backgroundColor:
+                        key + 1 === seletecDays ? '#1890ff5F' : undefined,
+                    }}
+                  >
+                    <div
+                      onClick={() => {
+                        setSelectedDays(key + 1);
+                      }}
+                    >{`${key + 1} Dia $${price}`}</div>
+                  </Card.Grid>
+                ))}
+                {/* </Row> */}
+              </Card>
+            ) : (
+              <Item key="price" label="Precio" className="price-description">
+                <Text
+                  type="secondary"
+                  delete={on_sale}
+                  className={`${on_sale ? 'on_sale' : 'regular'}`}
+                >
+                  ${regular_price}
+                </Text>
+                {on_sale && (
+                  <Text style={{ marginLeft: 15 }}>${sale_price}</Text>
+                )}
+              </Item>
+            )}
+
             <Item key="desc" label="Descripcion">
               <p dangerouslySetInnerHTML={{ __html: description }} />
             </Item>
+
             <Text type="secondary">Tallas:</Text>
             <Row>
               {Array.isArray(sizes) ? (
@@ -111,6 +155,23 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
               </Button>
             </Item>
           </Descriptions>
+          <Card
+            title={
+              <Row align="middle" justify="space-around">
+                <Title level={4} style={{ marginBottom: 0 }}>
+                  Envios
+                </Title>
+                <CarOutlined />
+              </Row>
+            }
+            style={{
+              width: 300,
+            }}
+          >
+            <Text type="secondary">
+              Gratis a cualquier parte de tierra del fuego y a cualquiera hora!
+            </Text>
+          </Card>
         </Col>
       </Row>
     </>

@@ -27,7 +27,10 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
   };
 
   const handleUpdateCartItem = (count = 1) => {
-    if (itemCount > count) {
+    console.log(count, 'HEY');
+    console.log(itemCount, 'HOY');
+
+    if (itemCount < count) {
       updateCartItemCount(product_id, true);
     } else {
       updateCartItemCount(product_id, false);

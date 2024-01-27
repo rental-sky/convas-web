@@ -4,6 +4,7 @@ import CheckoutItem from './CheckoutItem';
 import { CartContext } from '../../../contexts';
 import './CheckoutList.less';
 import { Product } from '../../../store/productStore';
+import { Radio } from 'antd';
 
 interface CheckoutListProps {
   products: Product[];
@@ -22,6 +23,7 @@ const CheckoutList: React.FC<CheckoutListProps> = ({ products }) => {
       {products.map((product) => {
         return <CheckoutItem product={product} key={product.id} />;
       })}
+
       <div className="overall-total-price">
         <div>
           TOTAL: <span>${totalPrice}</span>

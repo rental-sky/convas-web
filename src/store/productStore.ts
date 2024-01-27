@@ -17,6 +17,7 @@ export interface Product {
   available: boolean;
   brand: string;
   sizes: string[];
+  prices?: string[];
   sale_price: string;
   on_sale: boolean;
   images: ProductImage[];
@@ -82,6 +83,7 @@ const useProductStore = create<ProducStore>((set, get) => ({
   init: async () => {
     try {
       const response = await api.products.list();
+      const tarif = await api.tarif.list();
 
       const { tables, boots, helmets, googles } = response;
 
@@ -92,6 +94,7 @@ const useProductStore = create<ProducStore>((set, get) => ({
           helmets,
           googles,
         },
+        saleProducts: tarif,
       });
     } catch (error) {
       // TODO: Handle error
