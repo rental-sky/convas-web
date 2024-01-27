@@ -55,6 +55,67 @@ const processData = (data: any[]) => {
   });
 };
 
+const processDataTarif = (data: any[]) => {
+  return data.map((row) => {
+    const [
+      id,
+      name,
+      description,
+      price,
+      price_2,
+      price_3,
+      price_4,
+      price_5,
+      price_6,
+      price_7,
+      on_sale,
+      brand,
+      sizes,
+      image,
+    ] = row.split('\t');
+    let sizesArray;
+    try {
+      // Intenta analizar sizes como JSON
+      sizesArray = JSON.parse(sizes);
+    } catch (error) {
+      // Si no se pudo analizar como JSON, trata sizes como un valor individual
+      sizesArray = [sizes];
+    }
+
+    const prices = [
+      price,
+      price_2,
+      price_3,
+      price_4,
+      price_5,
+      price_6,
+      price_7,
+    ];
+
+    return {
+      id,
+      name,
+      slug: name.replace(/\s/g, ''),
+      description,
+      price: price.replace('$', ''),
+      regular_price: price.replace('$', ''),
+      sale_price: price.replace('$', ''),
+      available: true,
+      prices: prices.map((price) => price.replace('$', '')),
+      on_sale: on_sale === 'SI',
+      sizes: sizesArray,
+      brand,
+      images: [
+        {
+          id: id + name.replace(/\s/g, ''),
+          src: image,
+          alt: name,
+        },
+      ],
+    };
+  });
+};
+
 const api = {
   products: {
     list: async (): Promise<ProductsResponse> => {
@@ -107,6 +168,30 @@ const api = {
           helmets: [],
           googles: [],
         };
+      }
+    },
+  },
+  tarif: {
+    list: async (): Promise<Product[]> => {
+      const promises = [
+        axios.get(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQydJIfbug_P2WB1IxOzq0O-__7VcZuDQTRIfJGD1KFMnQ_XE6H5Cx4r1GM8u68bGxcriZ2iZixJVq4/pub?gid=1414758922&single=true&output=tsv'
+        ),
+      ];
+
+      try {
+        const [tarifario] = await Promise.all(promises);
+
+        const [tarifarioData] = [tarifario.data];
+
+        const tarifarioRows = tarifarioData.split('\n').slice(1);
+
+        const dataTarifario = processDataTarif(tarifarioRows);
+
+        return dataTarifario;
+      } catch (error) {
+        console.log(error);
+        return [];
       }
     },
   },

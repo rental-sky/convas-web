@@ -15,7 +15,12 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ product }) => {
 
   const product_id = `${id}`;
   const totalItemCount = getCartItemCount(items, product_id);
-  const subtotal = parseFloat(price) * totalItemCount;
+  console.log({
+    1: price,
+    2: parseFloat(price.replace(/,/g, '')),
+  });
+
+  const subtotal = parseFloat(price.replace(/,/g, '')) * totalItemCount;
 
   return (
     <div className="cart-item">

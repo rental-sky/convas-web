@@ -6,6 +6,14 @@ import CategoryListRenderer from '../components/CategoryList/CategoryListRendere
 import ProductListRenderer from '../components/ProductList/ProductListRenderer';
 import SimpleHeading from '../components/SimpleHeading';
 import useProductStore, { ProducStore } from '../store/productStore';
+import {
+  CarOutlined,
+  CreditCardOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+import { Card, Col, Row, Tag, Typography } from 'antd';
+
+const { Text, Title } = Typography;
 
 const Home = () => {
   const [saleProducts] = useProductStore((s: ProducStore) => [s.saleProducts]);
@@ -70,6 +78,100 @@ const Home = () => {
     <MainLayout title="Convans Store">
       <MainCarousel />
 
+      <div className="site-card-wrapper">
+        <Row gutter={16}>
+          <Col span={8}>
+            <Card
+              bordered={false}
+              title={
+                <Row align="middle">
+                  <CarOutlined
+                    style={{
+                      fontSize: '1.5rem',
+                      marginBottom: 0,
+                    }}
+                  />
+                  <div style={{ width: '2rem' }} />
+                  <Title level={4} style={{ marginBottom: 0 }}>
+                    Envios
+                  </Title>
+                </Row>
+              }
+            >
+              <Col>
+                <Text type="secondary">
+                  Hacemos el envio{' '}
+                  <Tag key={'GRATIS'} color="success">
+                    GRATIS
+                  </Tag>
+                  a cualquier parte de tierra del fuego y a cualquiera hora!
+                </Text>
+              </Col>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card
+              bordered={false}
+              title={
+                <Row align="middle">
+                  <SettingOutlined
+                    style={{
+                      fontSize: '1.5rem',
+                      marginBottom: 0,
+                    }}
+                  />
+                  <div style={{ width: '2rem' }} />
+                  <Title level={4} style={{ marginBottom: 0 }}>
+                    Taller
+                  </Title>
+                </Row>
+              }
+            >
+              <Text type="secondary">
+                Traenos tu equipo y te lo dejamos como{' '}
+                <Tag key={'GRATIS'} color="blue">
+                  NUEVO
+                </Tag>
+              </Text>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card
+              title={
+                <Row align="middle">
+                  <CreditCardOutlined
+                    style={{
+                      fontSize: '1.5rem',
+                      marginBottom: 0,
+                    }}
+                  />
+                  <div style={{ width: '2rem' }} />
+                  <Title level={4} style={{ marginBottom: 0 }}>
+                    Pagos
+                  </Title>
+                </Row>
+              }
+              bordered={false}
+            >
+              <Text type="secondary">
+                Reserva y paga online, o con transferencia bancaria. aceptamos{' '}
+                <Tag key={'GRATIS'} color="green">
+                  Multiples medios de pago!
+                </Tag>
+              </Text>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+
+      <SimpleHeading title="Ofertas" level={2} />
+      <ProductListRenderer
+        skeleton
+        skeletonCount={4}
+        products={saleProducts}
+        breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
+      />
+
       <SimpleHeading title="Categorias" />
       <CategoryListRenderer
         categories={mainCategories}
@@ -80,14 +182,6 @@ const Home = () => {
           sm: 24,
           xs: 24,
         }}
-      />
-
-      <SimpleHeading title="Ofertas" level={2} />
-      <ProductListRenderer
-        skeleton
-        skeletonCount={4}
-        products={saleProducts}
-        breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
     </MainLayout>
   );
