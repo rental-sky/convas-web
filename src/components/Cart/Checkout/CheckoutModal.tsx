@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Modal, Radio } from 'antd';
+import { Card, Modal, Radio, Typography, Input, notification } from 'antd';
 import CheckoutList from './CheckoutList';
 
 import useProductStore, { Product } from '../../../store/productStore';
@@ -7,6 +7,14 @@ import { RadioChangeEvent } from 'antd/lib/radio';
 import useCartStore from '../../../store/cartStore';
 import { getCartItemCount } from '../../../helpers';
 import { CartContext } from '../../../contexts';
+
+import {
+  UserOutlined,
+  HomeOutlined,
+  PhoneOutlined,
+  CalendarOutlined,
+} from '@ant-design/icons';
+import TextArea from 'antd/lib/input/TextArea';
 
 interface CheckoutSummaryProps {
   visible: boolean;
@@ -23,8 +31,7 @@ const generateWhatsAppMessage = (
     date: string;
     time: string;
     phone: string;
-    height?: string;
-    weight?: string;
+    comments?: string;
   },
   total: number
 ) => {
@@ -55,6 +62,12 @@ const generateWhatsAppMessage = (
   message += `Hora: ${contactInfo.time}\n`;
   message += `Teléfono: ${contactInfo.phone}\n\n`;
 
+  // Agregar los comentarios al mensaje
+  if (contactInfo.comments) {
+    message += `*Comentarios*\n`;
+    message += `${contactInfo.comments}\n\n`;
+  }
+
   message += `*Método de pago:* ${paymentMethod}\n\n`;
   message += `\n\nTotal: ${total}\n\n`;
 
@@ -62,7 +75,7 @@ const generateWhatsAppMessage = (
   message = encodeURIComponent(message);
 
   // Crear la URL para abrir WhatsApp con el mensaje
-  const whatsappURL = `https://api.whatsapp.com/send?phone=${541151528465}&text=${message}`;
+  const whatsappURL = `https://api.whatsapp.com/send?phone=${5492901403225}&text=${message}`;
 
   return whatsappURL;
 };
@@ -94,17 +107,33 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
 
   const [paymentMethod, setPaymentMethod] = useState('efectivo');
 
+  const [formData, setformData] = useState({
+    name: '',
+    address: '',
+    date: '',
+    time: '',
+    phone: '',
+    comments: '',
+  });
+
   const onOk = () => {
+    if (
+      !formData.name ||
+      !formData.address ||
+      !formData.date ||
+      !formData.time ||
+      !formData.phone
+    ) {
+      notification.error({ message: 'Por favor completa todos los campos' });
+      return;
+    }
+
     const url = generateWhatsAppMessage(
       cartProducts,
       paymentMethod,
       items,
       {
-        name: 'name',
-        address: 'address',
-        date: 'date',
-        time: 'time',
-        phone: 'phone',
+        ...formData,
       },
       totalPrice
     );
@@ -115,7 +144,6 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
   const onChange4 = (p: RadioChangeEvent) => {
     setPaymentMethod(p.target.value);
   };
-
   return (
     <Modal
       title="Checkout Summary"
@@ -132,6 +160,64 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
           onChange={onChange4}
           value={paymentMethod}
           buttonStyle="solid"
+        />
+      </Card>
+      <Card>
+        <Typography.Text>Datos de entrega</Typography.Text>
+
+        <Input
+          size="small"
+          placeholder="Direccion"
+          prefix={<HomeOutlined />}
+          onChange={(e) => {
+            setformData({ ...formData, address: e.target.value });
+          }}
+        />
+        <div style={{ height: 10 }}></div>
+        <Input
+          size="small"
+          placeholder="Persona a recibir"
+          prefix={<UserOutlined />}
+          onChange={(e) => {
+            setformData({ ...formData, name: e.target.value });
+          }}
+        />
+        <div style={{ height: 10 }}></div>
+        <Input
+          size="small"
+          placeholder="Numero de contacto"
+          prefix={<PhoneOutlined />}
+          onChange={(e) => {
+            setformData({ ...formData, phone: e.target.value });
+          }}
+        />
+        <div style={{ height: 10 }}></div>
+        <Typography.Text>Fecha y hora de entrega</Typography.Text>
+        <Input
+          size="small"
+          type="date"
+          prefix={<CalendarOutlined />}
+          onChange={(e) => {
+            setformData({ ...formData, date: e.target.value });
+          }}
+        />
+        <div style={{ height: 10 }}></div>
+        <Input
+          size="small"
+          type="time"
+          prefix={<CalendarOutlined />}
+          onChange={(e) => {
+            setformData({ ...formData, time: e.target.value });
+          }}
+        />
+        <div style={{ height: 10 }}></div>
+        <TextArea
+          rows={4}
+          placeholder={`Si llevaste tabla comentanos pie usas Izquierdo o derecho y tu altura. \nSi son varias personas, comenta el pie y altura de cada uno.`}
+          maxLength={6}
+          onChange={(e) => {
+            setformData({ ...formData, comments: e.target.value });
+          }}
         />
       </Card>
     </Modal>
