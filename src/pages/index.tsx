@@ -12,6 +12,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 import { Card, Col, Row, Tag, Typography } from 'antd';
+import MainRowLayout from '../components/MainRowLayout/MainRowLayout';
 
 const { Text, Title } = Typography;
 
@@ -78,91 +79,90 @@ const Home = () => {
     <MainLayout title="Convans Store">
       <MainCarousel />
 
-      <div className="site-card-wrapper">
-        <Row gutter={16}>
-          <Col span={8}>
-            <Card
-              bordered={false}
-              title={
-                <Row align="middle">
-                  <CarOutlined
-                    style={{
-                      fontSize: '1.5rem',
-                      marginBottom: 0,
-                    }}
-                  />
-                  <div style={{ width: '2rem' }} />
-                  <Title level={4} style={{ marginBottom: 0 }}>
-                    Envios
-                  </Title>
-                </Row>
-              }
-            >
-              <Col>
-                <Text type="secondary">
-                  Hacemos el envio{' '}
-                  <Tag key={'GRATIS'} color="success">
-                    GRATIS
-                  </Tag>
-                  a cualquier parte de tierra del fuego y a cualquiera hora!
-                </Text>
-              </Col>
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card
-              bordered={false}
-              title={
-                <Row align="middle">
-                  <SettingOutlined
-                    style={{
-                      fontSize: '1.5rem',
-                      marginBottom: 0,
-                    }}
-                  />
-                  <div style={{ width: '2rem' }} />
-                  <Title level={4} style={{ marginBottom: 0 }}>
-                    Taller
-                  </Title>
-                </Row>
-              }
-            >
+      <MainRowLayout rowClassName="product-list">
+        <Col span={8}>
+          <Card
+            bordered={false}
+            title={
+              <Row align="middle">
+                <CarOutlined
+                  style={{
+                    fontSize: '1.5rem',
+                    marginBottom: 0,
+                  }}
+                />
+                <div style={{ width: '2rem' }} />
+                <Title level={4} style={{ marginBottom: 0 }}>
+                  Envios
+                </Title>
+              </Row>
+            }
+          >
+            <Col>
               <Text type="secondary">
-                Traenos tu equipo y te lo dejamos como{' '}
-                <Tag key={'GRATIS'} color="blue">
-                  NUEVO
+                Hacemos el envio{' '}
+                <Tag key={'GRATIS'} color="success">
+                  GRATIS
                 </Tag>
+                a cualquier parte de tierra del fuego y a cualquiera hora!
               </Text>
-            </Card>
-          </Col>
-          <Col span={8}>
-            <Card
-              title={
-                <Row align="middle">
-                  <CreditCardOutlined
-                    style={{
-                      fontSize: '1.5rem',
-                      marginBottom: 0,
-                    }}
-                  />
-                  <div style={{ width: '2rem' }} />
-                  <Title level={4} style={{ marginBottom: 0 }}>
-                    Pagos
-                  </Title>
-                </Row>
-              }
-              bordered={false}
-            >
-              <Text type="secondary">
-                Reserva y paga online, o con transferencia bancaria. aceptamos{' '}
-                <Tag key={'GRATIS'} color="green">
-                  Multiples medios de pago!
-                </Tag>
-              </Text>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+            </Col>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card
+            bordered={false}
+            title={
+              <Row align="middle">
+                <SettingOutlined
+                  style={{
+                    fontSize: '1.5rem',
+                    marginBottom: 0,
+                  }}
+                />
+                <div style={{ width: '2rem' }} />
+                <Title level={4} style={{ marginBottom: 0 }}>
+                  Taller
+                </Title>
+              </Row>
+            }
+          >
+            <Text type="secondary">
+              Traenos tu equipo y te lo dejamos como{' '}
+              <Tag key={'GRATIS'} color="blue">
+                NUEVO
+              </Tag>
+            </Text>
+          </Card>
+        </Col>
+        <Col span={8}>
+          <Card
+            title={
+              <Row align="middle">
+                <CreditCardOutlined
+                  style={{
+                    fontSize: '1.5rem',
+                    marginBottom: 0,
+                  }}
+                />
+                <div style={{ width: '2rem' }} />
+                <Title level={4} style={{ marginBottom: 0 }}>
+                  Pagos
+                </Title>
+              </Row>
+            }
+            bordered={false}
+          >
+            <Text type="secondary">
+              Reserva y paga online, o con transferencia bancaria. aceptamos
+              Multiples medios de{' '}
+              <Tag key={'GRATIS'} color="green">
+                pago!
+              </Tag>
+            </Text>
+          </Card>
+        </Col>
+      </MainRowLayout>
 
       <SimpleHeading title="Ofertas" level={2} />
       <ProductListRenderer

@@ -78,10 +78,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
             <img
               src={featured_image}
               style={{
-                height: '100%',
+                height: 500,
                 width: '100%',
                 backgroundColor: '#fafafa',
-                objectFit: 'contain',
+                objectFit: 'cover',
               }}
             />
           )}
@@ -95,25 +95,27 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
         >
           <Descriptions title={name} column={1}>
             {isTarif ? (
-              <Card title="Precios">
+              <>
                 <Title level={4}>Precios</Title>
-                {/* <Row gutter={16}> */}
-                {prices.map((price, key) => (
-                  <Card.Grid
-                    style={{
-                      backgroundColor:
-                        key + 1 === seletecDays ? '#1890ff5F' : undefined,
-                    }}
-                  >
-                    <div
-                      onClick={() => {
-                        setSelectedDays(key + 1);
+                <Row gutter={16}>
+                  {prices.map((price, key) => (
+                    <Card.Grid
+                      style={{
+                        backgroundColor:
+                          key + 1 === seletecDays ? '#1890ff5F' : undefined,
                       }}
-                    >{`${key + 1} Dia $${price}`}</div>
-                  </Card.Grid>
-                ))}
-                {/* </Row> */}
-              </Card>
+                    >
+                      <div
+                        onClick={() => {
+                          setSelectedDays(key + 1);
+                        }}
+                      >
+                        {`${key + 1} Dia $${price}`}
+                      </div>
+                    </Card.Grid>
+                  ))}
+                </Row>
+              </>
             ) : (
               <Item key="price" label="Precio" className="price-description">
                 <Text

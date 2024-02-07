@@ -43,7 +43,7 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
                 style={{
                   height: '300px',
                   width: '100%',
-                  objectFit: 'contain',
+                  objectFit: 'cover',
                 }}
               />
             ) : null
@@ -70,7 +70,7 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
           </Row>
           {isTarif ? (
             <>
-              {prices.slice(4).map((price, key) => (
+              {prices.slice(0, 3).map((price, key) => (
                 <Col key={key}>
                   <Row gutter={8}>
                     <Text type="secondary">{`${key + 1} Dia $${price} `}</Text>
