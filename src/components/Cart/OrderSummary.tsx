@@ -19,20 +19,27 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
 
-  console.log('cartProducts', totalPrice);
-
   return (
     <div className="order-summary">
       <Title level={3}>Orden</Title>
       <div>
         <Text type="secondary">Total</Text>
-        <Text disabled={cartProducts.length === 0}>
-          ARS {Number(totalPrice)}
+        <Text
+          disabled={cartProducts.length === 0}
+          style={{
+            fontSize: '1rem',
+          }}
+        >
+          ARS{' '}
+          {Number(totalPrice).toLocaleString('es-AR', {
+            style: 'currency',
+            currency: 'ARS',
+          })}
         </Text>
       </div>
       <Button
         type="primary"
-        size="large"
+        size="middle"
         disabled={cartProducts.length === 0 || totalItems === 0}
         onClick={() => setModalVisibility(true)}
       >

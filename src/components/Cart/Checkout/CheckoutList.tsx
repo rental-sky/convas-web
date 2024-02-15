@@ -25,8 +25,19 @@ const CheckoutList: React.FC<CheckoutListProps> = ({ products }) => {
       })}
 
       <div className="overall-total-price">
-        <div>
-          TOTAL: <span>${totalPrice}</span>
+        <div
+          style={{
+            fontSize: '1rem',
+          }}
+        >
+          TOTAL:{' '}
+          <span
+            style={{
+              fontSize: '1rem',
+            }}
+          >
+            ${totalPrice}
+          </span>
         </div>
       </div>
     </div>

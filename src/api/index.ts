@@ -76,9 +76,14 @@ const processDataTarif = (data: any[]) => {
     let sizesArray;
     try {
       // Intenta analizar sizes como JSON
+      console.log(typeof sizes, 'ooooooooo');
+
       sizesArray = JSON.parse(sizes);
+      console.log(sizesArray, 'UNO');
     } catch (error) {
       // Si no se pudo analizar como JSON, trata sizes como un valor individual
+      console.log(sizes, 'DOS');
+
       sizesArray = [sizes];
     }
 
