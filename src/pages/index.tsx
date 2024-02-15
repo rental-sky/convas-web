@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons';
 import { Card, Col, Layout, Row, Tag, Typography } from 'antd';
 import MainRowLayout from '../components/MainRowLayout/MainRowLayout';
+import SecondaryCarousel from '../components/MainCarousel/SecondaryCarousel';
 
 const { Text, Title } = Typography;
 
@@ -121,7 +122,6 @@ const Home = () => {
       <MainCarousel />
 
       <Row justify="center" className="product-list">
-        {/* Mapear cada tarjeta */}
         {cardsData.map((card, index) => (
           <Col key={index} xs={24} md={8}>
             <Card
@@ -149,6 +149,10 @@ const Home = () => {
         products={saleProducts}
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
+
+      <SimpleHeading title="Nosotros" />
+
+      <SecondaryCarousel />
 
       <SimpleHeading title="Categorias" />
       <CategoryListRenderer

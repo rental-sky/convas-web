@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Card,
-  Modal,
-  Radio,
-  Typography,
-  Input,
-  notification,
-  Space,
-} from 'antd';
+import { Card, Modal, Radio, Typography, Input, notification } from 'antd';
 import CheckoutList from './CheckoutList';
 
 import useProductStore, { Product } from '../../../store/productStore';
@@ -163,8 +155,8 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
     >
       <CheckoutList products={cartProducts} />
 
-      <Radio.Group onChange={onSelectPaymentMethod} value={paymentMethod}>
-        <Space direction="vertical">
+      <Card>
+        <Radio.Group onChange={onSelectPaymentMethod} value={paymentMethod}>
           {optionsWithDisabled.map((option) => (
             <Radio
               key={option.value}
@@ -172,13 +164,10 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
               disabled={option.disabled}
             >
               {option.label}
-              {option.value === 'online' && option.disabled && (
-                <Input style={{ width: 100, marginLeft: 10 }} />
-              )}
             </Radio>
           ))}
-        </Space>
-      </Radio.Group>
+        </Radio.Group>
+      </Card>
       <Card>
         <Typography.Text>Datos de entrega</Typography.Text>
 
