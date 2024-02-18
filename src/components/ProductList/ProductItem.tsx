@@ -27,8 +27,6 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
 
   const isTarif = !!prices;
 
-  console.log(prices);
-
   const featured_image = images.length > 0 ? images[0] : '';
   return (
     <Link href="/product/[...product]" as={`/product/${id}/${slug}`}>
@@ -49,27 +47,27 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
             ) : null
           }
         >
-          <Row>
-            <Text style={{ textAlign: 'center' }} strong>
-              {name}
-            </Text>
-            {on_sale && !isTarif && (
-              <Button style={{ marginLeft: 10 }}>Oferta!</Button>
-            )}
-          </Row>
-          <Row>
-            {Array.isArray(sizes) ? (
-              sizes.map((size, key) => (
-                <Tag key={key + size} color="success">
-                  {size}
-                </Tag>
-              ))
-            ) : (
-              <Tag color="success">{sizes}</Tag>
-            )}
-          </Row>
           {isTarif ? (
             <>
+              <Row>
+                <Text style={{ textAlign: 'center' }} strong>
+                  {name}
+                </Text>
+                {on_sale && !isTarif && (
+                  <Button style={{ marginLeft: 10 }}>Oferta!</Button>
+                )}
+              </Row>
+              <Row>
+                {Array.isArray(sizes) ? (
+                  sizes.map((size, key) => (
+                    <Tag key={key + size} color="success">
+                      {size}
+                    </Tag>
+                  ))
+                ) : (
+                  <Tag color="success">{sizes}</Tag>
+                )}
+              </Row>
               {prices.slice(0, 3).map((price, key) => (
                 <Col key={key}>
                   <Row gutter={8}>
@@ -79,17 +77,7 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
               ))}
               <Text type="warning">Ver mas</Text>
             </>
-          ) : (
-            <Row>
-              <Text type="secondary" delete={on_sale}>
-                {`$${regular_price}`}
-              </Text>
-
-              {on_sale && (
-                <Text style={{ marginLeft: 15 }}>{`$${sale_price}`}</Text>
-              )}
-            </Row>
-          )}
+          ) : null}
         </Card>
       </Col>
     </Link>

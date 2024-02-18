@@ -26,7 +26,7 @@ export interface Product {
 export type ProducStore = {
   saleProducts: Product[];
   categoryProducts: {
-    [key: string]: Product[];
+    [key: string]: ProductImage[];
   };
   currentProduct?: Product;
   cartProducts: Product[];
@@ -46,12 +46,7 @@ const useProductStore = create<ProducStore>((set, get) => ({
   setCurrentProduct: (currentProduct: Product) => set({ currentProduct }),
   setCartProducts: (cartProducts: Product[]) => set({ cartProducts }),
   fetchProductById: (id: string) => {
-    const allProducts = get().saleProducts.concat(
-      get().categoryProducts.tables,
-      get().categoryProducts.boots,
-      get().categoryProducts.helmets,
-      get().categoryProducts.googles
-    );
+    const allProducts = get().saleProducts;
 
     if (allProducts.length === 0) return;
 
@@ -63,12 +58,7 @@ const useProductStore = create<ProducStore>((set, get) => ({
     get().setCurrentProduct(product);
   },
   fetchProductsByIds: (ids: string) => {
-    const allProducts = get().saleProducts.concat(
-      get().categoryProducts.tables,
-      get().categoryProducts.boots,
-      get().categoryProducts.helmets,
-      get().categoryProducts.googles
-    );
+    const allProducts = get().saleProducts;
 
     const products = allProducts.filter((product: Product) =>
       ids.includes(String(product.id))
@@ -82,17 +72,42 @@ const useProductStore = create<ProducStore>((set, get) => ({
   },
   init: async () => {
     try {
-      const response = await api.products.list();
+      // const response = await api.products.list();
       const tarif = await api.tarif.list();
 
-      const { tables, boots, helmets, googles } = response;
+      const tables = Array.from(
+        { length: 15 },
+        (_, index) => `/images/tables/${index + 1}t.JPG`
+      ).map((src, index) => ({
+        id: index + 1,
+        src,
+        alt: `Table ${index + 1}`,
+      }));
+
+      const boots = Array.from(
+        { length: 13 },
+        (_, index) => `/images/boots/${index + 1}b.JPG`
+      ).map((src, index) => ({
+        id: index + 1,
+        src,
+        alt: `Boots ${index + 1}`,
+      }));
+
+      const helmets = Array.from(
+        { length: 10 },
+        (_, index) => `/images/helmets/${index + 1}h.JPG`
+      ).map((src, index) => ({
+        id: index + 1,
+        src,
+        alt: `Helmets ${index + 1}`,
+      }));
 
       set({
         categoryProducts: {
           tables,
           boots,
           helmets,
-          googles,
+          googles: [],
         },
         saleProducts: tarif,
       });

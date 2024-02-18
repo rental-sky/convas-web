@@ -1,9 +1,15 @@
 import { Carousel } from 'antd';
 import './MainCarousel.less';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const MainCarousel = () => {
   return (
-    <Carousel autoplay>
+    <Carousel
+      autoplay
+      arrows
+      nextArrow={<LeftOutlined />}
+      prevArrow={<RightOutlined />}
+    >
       <div>
         <img
           src="/images/carousel-demo-images/convans.png"

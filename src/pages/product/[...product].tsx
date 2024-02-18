@@ -32,7 +32,7 @@ const Product = () => {
   }, [currentProduct]);
 
   return (
-    <MainLayout title={`React eCommerce - ${currentProductName}`}>
+    <MainLayout title={`Covans Snowboard  - ${currentProductName}`}>
       <SingleProductRenderer
         product={currentProduct}
         loading={isLoading}

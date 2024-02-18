@@ -43,7 +43,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         disabled={cartProducts.length === 0 || totalItems === 0}
         onClick={() => setModalVisibility(true)}
       >
-        CHECKOUT
+        CONFIRMAR
       </Button>
       <CheckoutModal
         visible={modalVisibility}

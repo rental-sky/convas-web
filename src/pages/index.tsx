@@ -118,7 +118,7 @@ const Home = () => {
   ];
 
   return (
-    <MainLayout title="Convans Store">
+    <MainLayout title="Convans Store Snowboard">
       <MainCarousel />
 
       <Row justify="center" className="product-list">

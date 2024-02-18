@@ -52,11 +52,12 @@ const Category = () => {
   return (
     <MainLayout title={`Covans - ${currentCategoryName} category`}>
       <MainPageHeader
-        title={`${MAP_CATEGORY_TITLE[currentCategoryName]?.title}`}
+        title={``}
         subTitle={MAP_CATEGORY_TITLE[currentCategoryName]?.subtitle}
       />
       <ProductListRenderer
         spin={isLoading}
+        onlyImage
         products={categoriesProducts}
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />

@@ -6,7 +6,7 @@ import CartListRenderer from '../components/Cart/CartListRenderer';
 
 import OrderSummary from '../components/Cart/OrderSummary';
 
-import { CartContext, SkeletonListContext, Breakpoints } from '../contexts';
+import { CartContext, SkeletonListContext } from '../contexts';
 import './cart.less';
 import useProductStore from '../store/productStore';
 import useCartStore from '../store/cartStore';

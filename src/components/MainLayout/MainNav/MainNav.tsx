@@ -17,7 +17,15 @@ const MainNav = () => {
         <Col span={2}>
           <div className="left-nav-items">
             <Link href="/">
-              <a>Home</a>
+              <img
+                src="/images/logo.png"
+                alt="logo"
+                style={{
+                  width: 64,
+                  height: 64,
+                  cursor: 'pointer',
+                }}
+              />
             </Link>
           </div>
         </Col>
