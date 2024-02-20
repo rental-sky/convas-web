@@ -58,7 +58,7 @@ const Home = () => {
       count: 150,
       image: {
         id: 103,
-        src: 'https://www.eraescola.com/wp-content/uploads/2021/06/botasdesnow.jpg',
+        src: 'https://i.ibb.co/VmpKYJK/eb691b67-a5a1-476c-8539-08aeaaa7c591.jpg',
       },
     },
     {
@@ -71,7 +71,7 @@ const Home = () => {
       count: 200,
       image: {
         id: 104,
-        src: 'https://i.ibb.co/VmpKYJK/eb691b67-a5a1-476c-8539-08aeaaa7c591.jpg',
+        src: 'https://http2.mlstatic.com/D_NQ_NP_920849-MLA54959641321_042023-O.webp',
       },
     },
   ];
@@ -118,7 +118,7 @@ const Home = () => {
   ];
 
   return (
-    <MainLayout title="Convans Store Snowboard">
+    <MainLayout title="Covans Snow Rental">
       <MainCarousel />
 
       <Row justify="center" className="product-list">
