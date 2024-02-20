@@ -71,7 +71,7 @@ const Home = () => {
       count: 200,
       image: {
         id: 104,
-        src: 'https://http2.mlstatic.com/D_NQ_NP_920849-MLA54959641321_042023-O.webp',
+        src: 'https://i.ibb.co/VmpKYJK/eb691b67-a5a1-476c-8539-08aeaaa7c591.jpg',
       },
     },
   ];
