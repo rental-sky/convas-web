@@ -28,10 +28,7 @@ const HeaderMeta: React.FC<HeaderMetaProps> = ({ title }) => {
         property="og:description"
         content="Alquiler de equipos de snowboard tierra del fuego"
       />
-      <meta
-        property="og:image"
-        content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK"
-      />
+      <meta property="og:image" content="https://i.ibb.co/D1TBZGh/covans.jpg" />
 
       {/* Etiquetas meta en inglés */}
       <meta itemProp="name" lang="en" content="Covans | Snowboard Store" />
