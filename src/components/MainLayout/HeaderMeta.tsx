@@ -4,13 +4,19 @@ interface HeaderMetaProps {
   title: string;
 }
 
-const HeaderMeta: React.FC<HeaderMetaProps> = ({ title }) => {
+const HeaderMeta: React.FC<HeaderMetaProps> = ({
+  title = 'Covans Rental Snowboard',
+}) => {
   return (
     <Head>
       <title>{title}</title>
+      <link rel="icon" href="public/favicon.ico" />
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <link rel="stylesheet" href="path/to/atropos.css" />
+      <meta
+        name="description"
+        content="Descubre las mejores tablas de snowboard para alquilar en Ushuaia, Tierra del Fuego. Equipo de alta calidad para principiantes y avanzados. Vive tu aventura de invierno con nosotros."
+      />
 
       {/* Google / Search Engine Tags  */}
       <meta itemProp="name" content="Rental Snowboard ushuaia" />
@@ -18,6 +24,10 @@ const HeaderMeta: React.FC<HeaderMetaProps> = ({ title }) => {
         itemProp="description"
         lang="es"
         content="Alquiler de equipos de snowboard tierra del fuego ushuaia"
+      />
+      <meta
+        name="keywords"
+        content="alquiler de snowboard, Ushuaia snowboard, alquiler snowboard Ushuaia, snowboarding Tierra del Fuego, aventura de invierno, alquiler equipo de nieve, deportes de invierno Argentina"
       />
 
       {/* <!-- Facebook Meta Tags --> */}
