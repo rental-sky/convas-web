@@ -15,6 +15,8 @@ import {
   CalendarOutlined,
 } from '@ant-design/icons';
 import TextArea from 'antd/lib/input/TextArea';
+import { db } from '../../../firebasecConfig';
+import { addDoc, collection } from '@firebase/firestore';
 
 interface CheckoutSummaryProps {
   visible: boolean;
@@ -80,6 +82,26 @@ const generateWhatsAppMessage = (
   return whatsappURL;
 };
 
+const Track = async (pedido: {
+  name: string;
+  address: string;
+  date: string;
+  time: string;
+  phone: string;
+  paymentMethod: string;
+  total: number;
+}) => {
+  try {
+    const docRef = await addDoc(collection(db, 'pedidos'), {
+      ...pedido,
+      createdAt: new Date(),
+    });
+    console.log('Documento escrito con ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error agregando documento: ', e);
+  }
+};
+
 const optionsWithDisabled = [
   {
     label: 'Efectivo',
@@ -138,6 +160,11 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
       totalPrice
     );
     window.open(url, '_blank');
+    Track({
+      ...formData,
+      paymentMethod,
+      total: totalPrice,
+    });
     hideModal();
   };
 
@@ -220,7 +247,7 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
         <TextArea
           rows={4}
           placeholder={`Si llevaste tabla comentanos pie usas Izquierdo o derecho y tu altura. \nSi son varias personas, comenta el pie y altura de cada uno.`}
-          maxLength={6}
+          maxLength={200}
           onChange={(e) => {
             setformData({ ...formData, comments: e.target.value });
           }}
