@@ -184,11 +184,7 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = ({
       <Card>
         <Radio.Group onChange={onSelectPaymentMethod} value={paymentMethod}>
           {optionsWithDisabled.map((option) => (
-            <Radio
-              key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-            >
+            <Radio key={option.value} value={option.value}>
               {option.label}
             </Radio>
           ))}
