@@ -113,8 +113,7 @@ const optionsWithDisabled = [
   },
   {
     label: 'Pago con tarjeta',
-    value: 'online',
-    disabled: true,
+    value: 'Tarjeta',
   },
 ];
 
