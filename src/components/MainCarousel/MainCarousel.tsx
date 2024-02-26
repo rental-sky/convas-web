@@ -1,15 +1,32 @@
 import { Carousel } from 'antd';
 import './MainCarousel.less';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
+
+const CarouselWrapper = styled(Carousel)`
+  > .slick-dots li button {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: black;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 100%;
+  }
+  > .slick-dots li.slick-active button {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background: '#fff';
+    border-color: black;
+    border-width: 2px;
+  }
+`;
 
 const MainCarousel = () => {
   return (
-    <Carousel
-      autoplay
-      arrows
-      nextArrow={<LeftOutlined />}
-      prevArrow={<RightOutlined />}
-    >
+    <CarouselWrapper autoplay arrows>
       <div>
         <img
           src="/images/carousel-demo-images/convans.png"
@@ -61,7 +78,7 @@ const MainCarousel = () => {
           }}
         />
       </div>
-    </Carousel>
+    </CarouselWrapper>
   );
 };
 
