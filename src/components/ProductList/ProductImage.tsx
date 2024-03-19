@@ -19,7 +19,7 @@ const ProductImage = ({ product }: { product: ProductImageType }) => {
             style={{
               height: '300px',
               width: '100%',
-              objectFit: 'cover',
+              objectFit: 'contain',
             }}
           />
         }

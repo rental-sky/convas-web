@@ -102,12 +102,21 @@ const useProductStore = create<ProducStore>((set, get) => ({
         alt: `Helmets ${index + 1}`,
       }));
 
+      const googles = Array.from(
+        { length: 17 },
+        (_, index) => `/images/googles/${index + 1}g.JPG`
+      ).map((src, index) => ({
+        id: index + 1,
+        src,
+        alt: `Googles ${index + 1}`,
+      }));
+
       set({
         categoryProducts: {
           tables,
           boots,
           helmets,
-          googles: [],
+          googles,
         },
         saleProducts: tarif,
       });
