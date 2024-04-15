@@ -30,3 +30,78 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .add-to-cart-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  > .ant-button {
+    width: 100%;
+  }
+
+  .container-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.grid-item {
+  flex: 1;
+  padding: 12px;
+  width: auto;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+  border: 0.5px solid #ccc; /* Borde entre los cuadrados */
+}
+
+/* Colores al pasar el mouse y al seleccionar */
+.grid-item:hover {
+  background-color: #1890ff7f;
+}
+
+.grid-item.selected {
+  background-color: #1890ff; /* Color de fondo cuando está seleccionado */
+
+  h1 {
+    color: white; /* Color del texto cuando está seleccionado */
+  }
+
+  p {
+    color: white; /* Color del texto cuando está seleccionado */
+  }
+}
+
+/* Estilos de los textos */
+.grid-item h1 {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 0.3em; /* Espacio entre el título y el subtítulo */
+}
+
+.grid-item p {
+  font-size: 1em;
+  color: #666;
+}
+
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 600px) {
+  .grid-item h1 {
+    font-size: 1em;
+  }
+  .grid-item p {
+    font-size: 0.8em;
+  }
+}

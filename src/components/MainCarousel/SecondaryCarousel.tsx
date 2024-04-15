@@ -1,10 +1,10 @@
-import { Carousel, Row } from 'antd';
+import { Carousel } from 'antd';
 import styled from 'styled-components';
 
 const CarouselWrapper = styled(Carousel)`
   > .slick-dots li button {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-left: 8px;
     margin-right: 8px;
     background-color: black;
@@ -13,12 +13,33 @@ const CarouselWrapper = styled(Carousel)`
     border-radius: 100%;
   }
   > .slick-dots li.slick-active button {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 100%;
     background: '#fff';
     border-color: black;
     border-width: 2px;
+  }
+
+  @media (max-width: 768px) {
+    > .slick-dots li button {
+      width: 1px;
+      height: 1px;
+      margin-left: 1px;
+      margin-right: 1px;
+      background-color: black;
+      border-width: 1px;
+      border-color: white;
+      border-radius: 100%;
+    }
+    > .slick-dots li.slick-active button {
+      width: 1px;
+      height: 1px;
+      border-radius: 100%;
+      background: '#fff';
+      border-color: black;
+      border-width: 2px;
+    }
   }
 `;
 
@@ -26,15 +47,6 @@ const images = Array.from(
   { length: 22 },
   (_, index) => `/images/${index + 1}.JPG`
 );
-
-const BlurBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-`;
 
 const CenteredImage = styled.img`
   display: block;
@@ -54,7 +66,12 @@ const SecondaryCarousel = () => {
     >
       {images.map((image, index) => (
         <div key={index}>
-          <CenteredImage src={image} />
+          <CenteredImage
+            src={image}
+            style={{
+              objectFit: 'cover',
+            }}
+          />
         </div>
       ))}
     </CarouselWrapper>

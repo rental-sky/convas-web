@@ -24,6 +24,28 @@ interface SingleProductProps {
   product: Product;
 }
 
+const GridItem = ({
+  title,
+  subtitle,
+  selected,
+  onClick,
+}: {
+  title: string;
+  subtitle: string;
+  selected: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <div
+      className={`grid-item ${selected ? 'selected' : ''}`}
+      onClick={onClick}
+    >
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </div>
+  );
+};
+
 const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
   const breakpoints = React.useContext(SingleProductContext);
   const { addToCart, items } = useCartStore();
@@ -97,24 +119,6 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
             {isTarif ? (
               <>
                 <Title level={4}>Precios</Title>
-                <Row gutter={16}>
-                  {prices.map((price, key) => (
-                    <Card.Grid
-                      style={{
-                        backgroundColor:
-                          key + 1 === seletecDays ? '#1890ff5F' : undefined,
-                      }}
-                    >
-                      <div
-                        onClick={() => {
-                          setSelectedDays(key + 1);
-                        }}
-                      >
-                        {`${key + 1} Dia $${price}`}
-                      </div>
-                    </Card.Grid>
-                  ))}
-                </Row>
               </>
             ) : (
               <Item key="price" label="Precio" className="price-description">
@@ -147,16 +151,31 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
                 <Tag color="success">{sizes}</Tag>
               )}
             </Row>
-            <Item key="button" label="">
-              <Button
-                type="primary"
-                onClick={addItemToCart}
-                disabled={isItemInCart}
-              >
-                Añadir al carrito
-              </Button>
-            </Item>
           </Descriptions>
+          <div className="grid-container">
+            {prices?.map((item, index) => (
+              <GridItem
+                key={index}
+                selected={index + 1 === seletecDays}
+                onClick={() => setSelectedDays(index + 1)}
+                title={`Dia ${index + 1}`}
+                subtitle={`$${item}`}
+              />
+            ))}
+          </div>
+
+          <Item key="button" label="" className="container-button">
+            <Button
+              type="primary"
+              size="large"
+              onClick={addItemToCart}
+              disabled={isItemInCart}
+              className="add-to-cart-button"
+            >
+              Añadir al carrito
+            </Button>
+          </Item>
+
           <Card
             title={
               <Row align="middle" justify="space-around">
@@ -168,6 +187,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
             }
             style={{
               width: 300,
+              marginTop: 20,
             }}
           >
             <Text type="secondary">

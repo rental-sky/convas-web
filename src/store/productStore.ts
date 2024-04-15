@@ -76,7 +76,7 @@ const useProductStore = create<ProducStore>((set, get) => ({
       const tarif = await api.tarif.list();
 
       const tables = Array.from(
-        { length: 15 },
+        { length: 21 },
         (_, index) => `/images/tables/${index + 1}t.JPG`
       ).map((src, index) => ({
         id: index + 1,
