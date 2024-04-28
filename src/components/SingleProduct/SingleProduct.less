@@ -1,12 +1,16 @@
 .product-wrapper {
-  max-width: 700px;
+  @media (min-width: 500px) {
+    max-width: 100%;
+    padding: 1rem 4rem;
+  }
+
   margin: 50px auto;
   @media (max-width: 767px) {
     margin: 0 auto;
   }
   .product-image {
-    justify-content: center;
-    align-items: center;
+    justify-content: 'flex-start';
+
     display: flex;
   }
   .product-description {
@@ -18,7 +22,7 @@
       span.ant-typography {
         font-size: 30px;
         &:not(.on_sale) {
-          color: @primary-color;
+          color: '#ccc';
         }
       }
     }
@@ -105,3 +109,83 @@
     font-size: 0.8em;
   }
 }
+
+.carousel-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  position: relative; /* Añadido para posicionar absolutamente los slides */
+}
+
+.slide {
+  display: flex;
+  opacity: 0; /* Inicialmente, todos los slides son transparentes */
+  max-width: 100%;
+  max-height: 600px;
+
+  transition: opacity 1s ease, transform 1s ease; /* Transición de opacidad y transformación */
+  position: absolute; /* Posicionamiento absoluto para que se superpongan */
+  top: 0; /* Alineación vertical */
+  left: 0; /* Alineación horizontal */
+  object-fit: contain;
+  width: 100%; /* Asegurarse de que cada slide ocupa el ancho completo del contenedor */
+}
+
+.slide.active {
+  opacity: 1; /* El slide activo es completamente opaco */
+  position: relative; /* El slide activo es posicionado de forma relativa */
+}
+
+.carousel-button {
+  cursor: pointer;
+  padding: 16px;
+  background-color: #f1f1f1;
+  border-radius: 50px;
+  border: none;
+
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100; /* Asegurarse de que esté por encima de las imágenes */
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: #ccc;
+}
+
+// @keyframes scroll {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   20% {
+//     transform: translateX(-100%);
+//   }
+//   40% {
+//     transform: translateX(-200%);
+//   }
+//   60% {
+//     transform: translateX(-300%);
+//   }
+//   80% {
+//     transform: translateX(-400%);
+//   }
+//   100% {
+//     transform: translateX(-500%);
+//   }
+// }

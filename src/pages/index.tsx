@@ -18,7 +18,10 @@ import SecondaryCarousel from '../components/MainCarousel/SecondaryCarousel';
 const { Text, Title } = Typography;
 
 const Home = () => {
-  const [saleProducts] = useProductStore((s: ProducStore) => [s.saleProducts]);
+  const [saleProducts, produtcs] = useProductStore((s: ProducStore) => [
+    s.saleProducts,
+    s.products,
+  ]);
 
   // mock
   const mainCategories = [
@@ -150,8 +153,15 @@ const Home = () => {
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
 
-      <SimpleHeading title="Nosotros" />
+      <SimpleHeading title="Productos" level={2} />
+      <ProductListRenderer
+        skeleton
+        skeletonCount={8}
+        products={produtcs}
+        breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
+      />
 
+      <SimpleHeading title="Nosotros" />
       <SecondaryCarousel />
 
       <SimpleHeading title="Categorias" />

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import api from '../api';
+import { all } from 'axios';
 
 export interface ProductImage {
   id: number;
@@ -18,6 +19,8 @@ export interface Product {
   brand: string;
   sizes: string[];
   prices?: string[];
+  characteristics?: string[];
+  type: 'product' | 'tarif';
   sale_price: string;
   on_sale: boolean;
   images: ProductImage[];
@@ -25,9 +28,10 @@ export interface Product {
 
 export type ProducStore = {
   saleProducts: Product[];
-  categoryProducts: {
+  galleryProducts: {
     [key: string]: ProductImage[];
   };
+  products: Product[];
   currentProduct?: Product;
   cartProducts: Product[];
   fetchProductById: (id: string) => void;
@@ -39,14 +43,15 @@ export type ProducStore = {
 
 const useProductStore = create<ProducStore>((set, get) => ({
   saleProducts: [],
-  categoryProducts: {},
+  galleryProducts: {},
+  products: [],
   cartProducts: [],
   currentProduct: undefined,
   setSaleProducts: (saleProducts: Product[]) => set({ saleProducts }),
   setCurrentProduct: (currentProduct: Product) => set({ currentProduct }),
   setCartProducts: (cartProducts: Product[]) => set({ cartProducts }),
   fetchProductById: (id: string) => {
-    const allProducts = get().saleProducts;
+    const allProducts = [get().saleProducts, get().products].flat(1);
 
     if (allProducts.length === 0) return;
 
@@ -72,53 +77,51 @@ const useProductStore = create<ProducStore>((set, get) => ({
   },
   init: async () => {
     try {
-      // const response = await api.products.list();
+      const response = await api.products.list();
+
       const tarif = await api.tarif.list();
 
-      const tables = Array.from(
-        { length: 21 },
-        (_, index) => `/images/tables/${index + 1}t.JPG`
-      ).map((src, index) => ({
-        id: index + 1,
-        src,
-        alt: `Table ${index + 1}`,
-      }));
-
-      const boots = Array.from(
-        { length: 13 },
-        (_, index) => `/images/boots/${index + 1}b.JPG`
-      ).map((src, index) => ({
-        id: index + 1,
-        src,
-        alt: `Boots ${index + 1}`,
-      }));
-
-      const helmets = Array.from(
-        { length: 10 },
-        (_, index) => `/images/helmets/${index + 1}h.JPG`
-      ).map((src, index) => ({
-        id: index + 1,
-        src,
-        alt: `Helmets ${index + 1}`,
-      }));
-
-      const googles = Array.from(
-        { length: 17 },
-        (_, index) => `/images/googles/${index + 1}g.JPG`
-      ).map((src, index) => ({
-        id: index + 1,
-        src,
-        alt: `Googles ${index + 1}`,
-      }));
+      console.log({
+        tables: response.tables,
+      });
 
       set({
-        categoryProducts: {
-          tables,
-          boots,
-          helmets,
-          googles,
+        galleryProducts: {
+          tables: Array.from(
+            { length: 21 },
+            (_, index) => `/images/tables/${index + 1}t.JPG`
+          ).map((src, index) => ({
+            id: index + 1,
+            src,
+            alt: `Table ${index + 1}`,
+          })),
+          boots: Array.from(
+            { length: 13 },
+            (_, index) => `/images/boots/${index + 1}b.JPG`
+          ).map((src, index) => ({
+            id: index + 1,
+            src,
+            alt: `Boots ${index + 1}`,
+          })),
+          helmets: Array.from(
+            { length: 10 },
+            (_, index) => `/images/helmets/${index + 1}h.JPG`
+          ).map((src, index) => ({
+            id: index + 1,
+            src,
+            alt: `Helmets ${index + 1}`,
+          })),
+          googles: Array.from(
+            { length: 17 },
+            (_, index) => `/images/googles/${index + 1}g.JPG`
+          ).map((src, index) => ({
+            id: index + 1,
+            src,
+            alt: `Googles ${index + 1}`,
+          })),
         },
         saleProducts: tarif,
+        products: response.tables,
       });
     } catch (error) {
       // TODO: Handle error

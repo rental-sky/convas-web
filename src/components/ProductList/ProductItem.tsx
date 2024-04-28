@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { Row, Col, Card, Typography, Button, Tag } from 'antd';
 import { SkeletonListContext } from '../../contexts';
 import { Product } from '../../store/productStore';
-import { isArray } from 'util';
-const { Text } = Typography;
+
+const { Text, Title, Paragraph } = Typography;
 
 interface SaleProductItemProps {
   product: Product;
@@ -75,9 +75,66 @@ const SaleProductItem: React.FC<SaleProductItemProps> = ({ product }) => {
                   </Row>
                 </Col>
               ))}
-              <Text type="warning">Ver mas</Text>
+              <Text
+                style={{
+                  fontFamily: 'monospace',
+                  display: 'flex',
+                  fontSize: '0.7rem',
+                  textAlign: 'end',
+                  color: '#1890ff',
+                }}
+              >
+                Ver mas precios
+              </Text>
             </>
-          ) : null}
+          ) : (
+            <div
+              style={{
+                gap: '2px',
+                flexDirection: 'column',
+                display: 'flex',
+              }}
+            >
+              <Row>
+                <Text style={{ textAlign: 'center' }} strong>
+                  {name}
+                </Text>
+                {on_sale && !isTarif && (
+                  <Button style={{ marginLeft: 10 }}>Oferta!</Button>
+                )}
+              </Row>
+              <Text style={{ marginTop: '1rem' }} strong>
+                Medidas:
+              </Text>
+              <Row>
+                {Array.isArray(sizes) ? (
+                  sizes.map((size, key) => (
+                    <Tag key={key + size} color="success">
+                      {size}
+                    </Tag>
+                  ))
+                ) : (
+                  <Tag color="success">{sizes}</Tag>
+                )}
+              </Row>
+
+              <Text type="secondary" style={{ marginTop: '1rem' }} strong>
+                Precio:
+              </Text>
+              <Row>
+                <Text
+                  delete={on_sale}
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  ${regular_price}
+                </Text>
+                {on_sale && <Text>${sale_price}</Text>}
+              </Row>
+            </div>
+          )}
         </Card>
       </Col>
     </Link>

@@ -36,7 +36,7 @@ const Category = () => {
   ) as keyof typeof MAP_CATEGORY_TITLE;
 
   const [categoryProducts] = useProductStore((s: ProducStore) => [
-    s.categoryProducts,
+    s.galleryProducts,
   ]);
 
   const categoriesProducts = useMemo(() => {
