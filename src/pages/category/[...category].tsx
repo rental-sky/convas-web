@@ -6,6 +6,7 @@ import MainLayout from '../../components/MainLayout/MainLayout';
 import ProductListRenderer from '../../components/ProductList/ProductListRenderer';
 import MainPageHeader from '../../components/MainPageHeader/MainPageHeader';
 import useProductStore, { ProducStore } from '../../store/productStore';
+import { track } from '../../firebasecConfig';
 
 const MAP_CATEGORY_TITLE = {
   helmets: {
@@ -48,6 +49,12 @@ const Category = () => {
   useEffect(() => {
     if (categoriesProducts && categoriesProducts.length > 0) setLoading(false);
   }, [categoriesProducts]);
+
+  useEffect(() => {
+    track('view_category', {
+      category: currentCategoryName,
+    });
+  }, [currentCategoryName]);
 
   return (
     <MainLayout title={`Covans - ${currentCategoryName} category`}>

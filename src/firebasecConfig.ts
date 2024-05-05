@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore'; // DB
 import { getFunctions } from 'firebase/functions'; // Funcs
 // TODO: Add SDKs for Firebase products that you want to use
@@ -20,9 +20,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
 const db = getFirestore(app);
 const functions = getFunctions(app);
 
-export { db, functions };
+const track = (eventName: string, data: any) => {
+  logEvent(analytics, eventName, data);
+};
+
+export { db, functions, track };

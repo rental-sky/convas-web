@@ -6,6 +6,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import ProductInfo from './ProductInfo';
 import useCartStore from '../../store/cartStore';
 import { Product } from '../../store/productStore';
+import { track } from '../../firebasecConfig';
 
 interface CartItemProps {
   product: Product;
@@ -22,6 +23,10 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
     useCartStore();
 
   const removeThisItem = () => {
+    track('remove_from_cart', {
+      product_id,
+      product_name: product.name,
+    });
     setDeleting(true);
     removeFromCart(product_id);
   };

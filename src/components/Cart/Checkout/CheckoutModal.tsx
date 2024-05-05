@@ -15,7 +15,7 @@ import {
   CalendarOutlined,
 } from '@ant-design/icons';
 import TextArea from 'antd/lib/input/TextArea';
-import { db } from '../../../firebasecConfig';
+import { db, track } from '../../../firebasecConfig';
 import { addDoc, collection } from '@firebase/firestore';
 
 interface CheckoutSummaryProps {
@@ -76,6 +76,12 @@ const generateWhatsAppMessage = (
   // Codificar el mensaje para que sea una URL válida para WhatsApp
   message = encodeURIComponent(message);
 
+  track('whatsapp_message', {
+    cartItems,
+    paymentMethod,
+    contactInfo,
+    total,
+  });
   // Crear la URL para abrir WhatsApp con el mensaje
   const whatsappURL = `https://api.whatsapp.com/send?phone=${5492901403225}&text=${message}`;
 

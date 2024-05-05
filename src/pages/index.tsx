@@ -14,6 +14,7 @@ import {
 import { Card, Col, Layout, Row, Tag, Typography } from 'antd';
 import MainRowLayout from '../components/MainRowLayout/MainRowLayout';
 import SecondaryCarousel from '../components/MainCarousel/SecondaryCarousel';
+import { track } from '../firebasecConfig';
 
 const { Text, Title } = Typography;
 
@@ -119,6 +120,12 @@ const Home = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    track('view_page', {
+      page_title: 'Home',
+    });
+  }, []);
 
   return (
     <MainLayout title="Covans Snow Rental">

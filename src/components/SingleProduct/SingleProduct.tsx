@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Row,
   Col,
@@ -17,6 +17,7 @@ import './SingleProduct.less';
 import useCartStore, { Cart } from '../../store/cartStore';
 import { Product } from '../../store/productStore';
 import { CarOutlined } from '@ant-design/icons';
+import { track } from '../../firebasecConfig';
 
 const { Text, Title, Paragraph } = Typography;
 const { Item } = Descriptions;
@@ -54,6 +55,12 @@ const generateWhatsAppMessage = (Product: Product) => {
 
   const { price, name, brand } = Product;
 
+  track('whatsapp_message', {
+    price,
+    name,
+    brand,
+  });
+
   // Fill product
   message += `*${name}*\n`;
   message += `Precio: ${price}\n`;
@@ -84,7 +91,6 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
     sale_price,
     on_sale,
     sizes,
-    price,
     characteristics,
     type,
     prices,
@@ -92,7 +98,6 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
   const productId = `${id}`;
 
   const [seletecDays, setSelectedDays] = useState(1);
-
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
 
   const prevSlide = () => {
@@ -110,6 +115,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
   const isTarif = type !== 'product' && prices;
 
   const addItemToCart = () => {
+    track('add_to_cart', {
+      productId,
+    });
+
     const price = isTarif ? prices[seletecDays - 1] : product.price;
 
     const item: Cart = {
@@ -134,6 +143,12 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
       className={`slide ${index === currentImageIdx ? 'active' : ''}`}
     />
   ));
+
+  useEffect(() => {
+    track('view_product', {
+      productId,
+    });
+  }, []);
 
   return (
     <>
