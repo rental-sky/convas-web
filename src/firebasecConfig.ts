@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics, logEvent } from 'firebase/analytics';
+import {
+  getAnalytics,
+  logEvent,
+  isSupported,
+  Analytics,
+} from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore'; // DB
 import { getFunctions } from 'firebase/functions'; // Funcs
 // TODO: Add SDKs for Firebase products that you want to use
@@ -18,14 +23,30 @@ const firebaseConfig = {
   measurementId: 'G-0YWFW5Q99N',
 };
 
+let isInitailized = false;
+let analytics: Analytics | null = null;
+
+const initializeAnalytics = async () => {
+  if (isInitailized) return analytics;
+
+  analytics = await isSupported().then((yes) =>
+    yes ? getAnalytics(app) : null
+  );
+  isInitailized = true;
+  return analytics;
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+initializeAnalytics();
 
 const db = getFirestore(app);
+
 const functions = getFunctions(app);
 
 const track = (eventName: string, data: any) => {
+  if (!analytics) return console.error('Analytics not supported');
   logEvent(analytics, eventName, data);
 };
 
