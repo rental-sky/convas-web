@@ -36,8 +36,11 @@ const initializeAnalytics = async () => {
     return null;
   }
 
+  console.log('Initializing Firebase Analytics');
+
   analytics = supported ? getAnalytics(app) : null;
   isInitailized = true;
+  return analytics;
 };
 
 // Initialize Firebase
@@ -46,10 +49,12 @@ const db = getFirestore(app);
 
 const functions = getFunctions(app);
 
-const track = (eventName: string, data: any) => {
+const track = async (eventName: string, data: any) => {
   if (!analytics) {
     console.error('Analytics not initialized');
-    initializeAnalytics();
+    const analy = await initializeAnalytics();
+    if (!analy) return;
+    logEvent(analy, eventName, data);
   } else {
     logEvent(analytics, eventName, data);
   }
