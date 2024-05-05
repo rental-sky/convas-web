@@ -152,7 +152,7 @@ const Home = () => {
         ))}
       </Row>
 
-      <SimpleHeading title="Ofertas" level={2} />
+      <SimpleHeading title="Tarifario" level={2} />
       <ProductListRenderer
         skeleton
         skeletonCount={4}
