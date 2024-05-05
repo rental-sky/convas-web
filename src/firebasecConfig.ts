@@ -29,25 +29,32 @@ let analytics: Analytics | null = null;
 const initializeAnalytics = async () => {
   if (isInitailized) return analytics;
 
-  analytics = await isSupported().then((yes) =>
-    yes ? getAnalytics(app) : null
-  );
+  const supported = await isSupported();
+
+  if (!supported) {
+    console.error('Analytics not supported');
+    return null;
+  }
+
+  analytics = supported ? getAnalytics(app) : null;
   isInitailized = true;
-  return analytics;
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-initializeAnalytics();
-
 const db = getFirestore(app);
 
 const functions = getFunctions(app);
 
 const track = (eventName: string, data: any) => {
-  if (!analytics) return console.error('Analytics not supported');
-  logEvent(analytics, eventName, data);
+  if (!analytics) {
+    console.error('Analytics not initialized');
+    initializeAnalytics();
+  } else {
+    logEvent(analytics, eventName, data);
+  }
 };
+
+initializeAnalytics();
 
 export { db, functions, track };
