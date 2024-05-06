@@ -13,7 +13,7 @@ interface LayoutProps {
 const MainLayout: React.FC<LayoutProps> = ({ children, title }) => {
   return (
     <>
-      <HeaderMeta title={title} />
+      <HeaderMeta defaultTitle={title} />
       <Layout>
         <MainNav />
         <Content style={{ minHeight: '500px' }}>{children}</Content>

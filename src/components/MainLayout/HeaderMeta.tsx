@@ -10,17 +10,18 @@ const HeaderMeta: React.FC<HeaderMetaProps> = ({ defaultTitle }) => {
   useEffect(() => {
     const userLang = navigator.language || 'en';
 
-    let localTitle;
-    if (userLang.startsWith('es')) {
-      localTitle = 'Alquiler y venta de equipamiento Snowboard en Ushuaia';
-    } else if (userLang.startsWith('en')) {
-      localTitle = 'Covans Rental Snowboard';
-    } else {
-      localTitle = title;
+    if (defaultTitle === 'Covans Rental Snowboard') {
+      let localTitle;
+      if (userLang.startsWith('es')) {
+        localTitle = 'Alquiler y venta de equipamiento Snowboard en Ushuaia';
+      } else if (userLang.startsWith('en')) {
+        localTitle = 'Covans Rental Snowboard';
+      } else {
+        localTitle = title;
+      }
+      setTitle(localTitle);
     }
-
-    setTitle(localTitle);
-  }, [title]);
+  }, []);
   return (
     <Head>
       <title>{title}</title>
