@@ -1,15 +1,30 @@
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 interface HeaderMetaProps {
-  title: string;
+  defaultTitle: string;
 }
+const HeaderMeta: React.FC<HeaderMetaProps> = ({ defaultTitle }) => {
+  const [title, setTitle] = useState(defaultTitle || 'Covans Rental Snowboard');
 
-const HeaderMeta: React.FC<HeaderMetaProps> = ({
-  title = 'Covans Rental Snowboard',
-}) => {
+  useEffect(() => {
+    const userLang = navigator.language || 'en';
+
+    let localTitle;
+    if (userLang.startsWith('es')) {
+      localTitle = 'Alquiler y venta de equipamiento Snowboard en Ushuaia';
+    } else if (userLang.startsWith('en')) {
+      localTitle = 'Covans Rental Snowboard';
+    } else {
+      localTitle = title;
+    }
+
+    setTitle(localTitle);
+  }, [title]);
   return (
     <Head>
       <title>{title}</title>
+
       <link rel="icon" href="favicon.ico" />
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -19,15 +34,15 @@ const HeaderMeta: React.FC<HeaderMetaProps> = ({
       />
 
       {/* Google / Search Engine Tags  */}
-      <meta itemProp="name" content="Rental Snowboard ushuaia" />
+      <meta itemProp="name" content="Rental Snowboard Ushuaia" />
       <meta
         itemProp="description"
         lang="es"
-        content="Alquiler de equipos de snowboard tierra del fuego ushuaia"
+        content="Alquiler y venta de equipamiento Snowboard en Ushuaia"
       />
       <meta
         name="keywords"
-        content="alquiler de snowboard, Ushuaia snowboard, alquiler snowboard Ushuaia, snowboarding Tierra del Fuego, aventura de invierno, alquiler equipo de nieve, deportes de invierno Argentina"
+        content="alquiler de snowboard, Ushuaia snowboard, equipamiento snowboard, snowboarding Tierra del Fuego, aventura de invierno, alquiler equipo de nieve, deportes de invierno Argentina"
       />
 
       {/* <!-- Facebook Meta Tags --> */}
