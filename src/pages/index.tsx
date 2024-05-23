@@ -11,10 +11,11 @@ import {
   CreditCardOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-import { Card, Col, Layout, Row, Tag, Typography } from 'antd';
-import MainRowLayout from '../components/MainRowLayout/MainRowLayout';
+import { Card, Col, Row, Tag, Typography } from 'antd';
+
 import SecondaryCarousel from '../components/MainCarousel/SecondaryCarousel';
 import { track } from '../firebasecConfig';
+import { useRouter } from 'next/router';
 
 const { Text, Title } = Typography;
 
@@ -23,6 +24,8 @@ const Home = () => {
     s.saleProducts,
     s.products,
   ]);
+
+  const router = useRouter();
 
   // mock
   const mainCategories = [
@@ -156,7 +159,13 @@ const Home = () => {
       <ProductListRenderer
         skeleton
         skeletonCount={4}
-        products={saleProducts}
+        seeMore={() => {
+          router.push('/tarifs');
+        }}
+        // take only 8 products
+        products={
+          saleProducts.length > 8 ? saleProducts.slice(0, 8) : saleProducts
+        }
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
 
@@ -164,7 +173,11 @@ const Home = () => {
       <ProductListRenderer
         skeleton
         skeletonCount={8}
-        products={produtcs}
+        seeMore={() => {
+          router.push('/products');
+        }}
+        // take only 8 products
+        products={produtcs.length > 8 ? produtcs.slice(0, 8) : produtcs}
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
 

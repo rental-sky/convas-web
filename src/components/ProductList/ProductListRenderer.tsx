@@ -13,6 +13,7 @@ interface ProductListRendererProps {
   spin?: boolean;
   onlyImage?: boolean;
   breakpoints: Breakpoints;
+  seeMore?: () => void;
 }
 
 const ProductListRenderer: React.FC<ProductListRendererProps> = ({
@@ -21,6 +22,7 @@ const ProductListRenderer: React.FC<ProductListRendererProps> = ({
   skeletonCount = 0,
   spin,
   breakpoints,
+  seeMore,
   onlyImage,
 }) => {
   return (
@@ -29,7 +31,11 @@ const ProductListRenderer: React.FC<ProductListRendererProps> = ({
         <SkeletonList itemCount={skeletonCount} />
       )}
       {products.length > 0 && !spin && (
-        <ProductList products={products} onlyImage={onlyImage} />
+        <ProductList
+          products={products}
+          onlyImage={onlyImage}
+          seeMore={seeMore}
+        />
       )}
       {spin && <Spinner />}
     </SkeletonListContext.Provider>

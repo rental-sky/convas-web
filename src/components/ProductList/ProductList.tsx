@@ -12,17 +12,19 @@ import {
 interface SaleProductListProps {
   products: (Product | ProductImageType)[];
   onlyImage?: boolean;
+  seeMore?: () => void;
 }
 
 const ProductList: React.FC<SaleProductListProps> = ({
   products,
   onlyImage = false,
+  seeMore,
 }) => {
   const productsImages = onlyImage ? (products as ProductImageType[]) : [];
   const productsItems = onlyImage ? [] : (products as Product[]);
 
   return (
-    <MainRowLayout rowClassName="product-list">
+    <MainRowLayout rowClassName="product-list" seeMore={seeMore}>
       {productsImages.length > 0 &&
         productsImages.map((product) => (
           <ProductImage product={product} key={product.id} />
