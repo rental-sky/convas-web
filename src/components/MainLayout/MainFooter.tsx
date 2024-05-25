@@ -7,10 +7,27 @@ import {
   FacebookOutlined,
 } from '@ant-design/icons';
 import './MainFooter.less';
+import { track } from '../../firebasecConfig';
 
 const { Footer } = Layout;
 
 const MainFooter = () => {
+  const onClickWhatsApp = () => {
+    track('whatsapp_message', {
+      source: 'footer',
+    });
+
+    window.open('https://wa.me/5492901403225', '_blank');
+  };
+
+  const onTelephoneClick = () => {
+    track('telephone_click', {
+      source: 'footer',
+    });
+
+    window.open('tel:+5492901403225', '_blank');
+  };
+
   return (
     <>
       <Footer
@@ -65,14 +82,14 @@ const MainFooter = () => {
             </a>
 
             <a
-              href="tel:+5492901403225"
+              onClick={onTelephoneClick}
               target="_blank"
               style={{ marginRight: 20 }}
             >
               <PhoneOutlined style={{ fontSize: 32, color: 'black' }} />
             </a>
             <a
-              href="https://wa.me/5492901403225"
+              onClick={onClickWhatsApp}
               target="_blank"
               style={{ marginRight: 20 }}
             >
@@ -82,7 +99,7 @@ const MainFooter = () => {
         </Row>
       </Footer>
       <a
-        href="https://wa.me/5492901403225"
+        onClick={onClickWhatsApp}
         className="fab-whatsapp"
         target="_blank"
         rel="noopener noreferrer"
