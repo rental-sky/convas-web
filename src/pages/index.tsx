@@ -168,7 +168,7 @@ const Home = () => {
         }
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
       />
-
+      {/* 
       <SimpleHeading title="Productos" level={2} />
       <ProductListRenderer
         skeleton
@@ -179,7 +179,7 @@ const Home = () => {
         // take only 8 products
         products={produtcs.length > 8 ? produtcs.slice(0, 8) : produtcs}
         breakpoints={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 24 }}
-      />
+      /> */}
 
       <SimpleHeading title="Nosotros" />
       <SecondaryCarousel />
